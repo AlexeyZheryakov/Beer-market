@@ -1,52 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import axios from 'axios';
+import Api from './Api/beer';
+import Сart from './pages/cart/cart';
+import Home from './pages/home/home';
+import Details from './pages/details/details';
+import Order from './pages/order/order';
 
 export default function App() {
-  function getBeer() {
-    return axios.get('https://api.punkapi.com/v2/beers').then((response) => console.log(response));
-  }
-
-  getBeer();
-
-  function Home() {
-    return <h2>Home</h2>;
-  }
-
-  function Details() {
-    return <h2>Details</h2>;
-  }
-
-  function Сart() {
-    return <h2>Сart</h2>;
-  }
-
-  function Order() {
-    return <h2>Order</h2>;
-  }
+  Api.getBeer();
 
   return (
     <Router>
       <div>
         <nav>
           <ul>
-            <li>
-              <Link to="/">Главная</Link>
-            </li>
-            <li>
-              <Link to="/details">Детальная информация</Link>
-            </li>
-            <li>
-              <Link to="/cart">Корзина</Link>
-            </li>
-            <li>
-              <Link to="/order">Оформление заказа</Link>
-            </li>
+            <li>Bear-Market</li>
           </ul>
         </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/order">
             <Order />
