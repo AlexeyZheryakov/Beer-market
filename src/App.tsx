@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Api from './Api/beer';
-import Сart from './pages/cart/cart';
-import Home from './pages/home/home';
-import Details from './pages/details/details';
-import Order from './pages/order/order';
+import Api from 'Api/beer';
+import Сart from 'pages/cart';
+import Home from 'pages/home';
+import Details from 'pages/details';
+import Order from 'pages/order';
+import routes from 'routes';
 
 export default function App() {
   Api.getBeer();
@@ -19,16 +20,16 @@ export default function App() {
         </nav>
 
         <Switch>
-          <Route path="/order">
+          <Route path={routes.order()}>
             <Order />
           </Route>
-          <Route path="/details">
+          <Route path={routes.details()}>
             <Details />
           </Route>
-          <Route path="/cart">
+          <Route path={routes.cart()}>
             <Сart />
           </Route>
-          <Route path="/">
+          <Route path={routes.main()}>
             <Home />
           </Route>
         </Switch>
