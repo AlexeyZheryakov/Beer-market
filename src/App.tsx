@@ -1,21 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Api from 'Api/beer';
+import Сart from 'pages/cart';
+import Home from 'pages/home';
+import Details from 'pages/details';
+import Order from 'pages/order';
+import routes from 'routes';
 
-function App() {
+export default function App() {
+  Api.getBeer();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>Bear-Market</li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path={routes.order()}>
+            <Order />
+          </Route>
+          <Route path={routes.details()}>
+            <Details />
+          </Route>
+          <Route path={routes.cart()}>
+            <Сart />
+          </Route>
+          <Route path={routes.main()}>
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
-
-export default App;
