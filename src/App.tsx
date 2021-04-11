@@ -6,9 +6,22 @@ import Home from 'pages/home';
 import Details from 'pages/details';
 import Order from 'pages/order';
 import routes from 'routes';
+import { applyMiddleware, createStore } from 'redux';
+
+const listReducer = (state = { data:{} }, action:{ type:string, list:any }) => {
+  switch (action.type) {
+    case 'INIT':
+      return { data: action.list }
+    default:
+      return state
+  }
+}
+const store = createStore(listReducer, applyMiddleware());
 
 export default function App() {
-  Api.getBeer();
+  React.useEffect(() => {
+    Api.getBeer().then((data) => store.dispatch({ type: 'INIT', list: data }));
+  }, []);
 
   return (
     <Router>
