@@ -8,15 +8,15 @@ import Order from 'pages/order';
 import routes from 'routes';
 import { applyMiddleware, createStore } from 'redux';
 
-const listReducer = (state = { data:{} }, action:{ type:string, list:any }) => {
+const listReducer = (state = { data:{} }, action: { type: string; list: any }) => {
   switch (action.type) {
     case 'INIT':
-      return { data: action.list }
+      return { data: action.list };
     default:
-      return state
+      return state;
   }
-}
-const store = createStore(listReducer, applyMiddleware());
+};
+const store = createStore(listReducer);
 
 export default function App() {
   React.useEffect(() => {
