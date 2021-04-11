@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const BASE_URL = 'https://api.punkapi.com/';
+
 const Api = {
-  getBeer: () => axios.get('https://api.punkapi.com/v2/beers').then((response) => console.log(response)),
+  // eslint-disable-next-line no-console
+  getBeer: () => axios.get(`${BASE_URL}/v2/beers`),
 };
 
 export default Api;
