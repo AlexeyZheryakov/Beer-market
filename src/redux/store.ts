@@ -1,7 +1,6 @@
 import { createStore, compose } from 'redux';
 
 import rootReducer from './reducers';
-import { SOME_ACTION } from './action-types';
 
 declare global {
   interface Window {
@@ -12,7 +11,5 @@ declare global {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, composeEnhancers());
-
-store.dispatch({ type: SOME_ACTION });
 
 export default store;

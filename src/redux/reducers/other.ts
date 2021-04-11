@@ -1,12 +1,8 @@
-import { SOME_ACTION } from '../action-types';
-import { IStore } from '../types';
-
-export interface IOtherAction {
-  type: string;
-}
+import { OTHER_ACTION_NAME } from '../action';
+import { IStore, IOtherAction } from '../types';
 
 function otherReducer(state: IStore['other'] = '', action: IOtherAction) {
-  if (action.type === SOME_ACTION) {
+  if (action.type === OTHER_ACTION_NAME) {
     return 'it is other reducer record...';
   }
   return state;

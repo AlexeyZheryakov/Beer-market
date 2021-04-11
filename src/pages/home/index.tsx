@@ -2,9 +2,8 @@ import React from 'react';
 
 import { List, ListItem } from '@material-ui/core';
 
-import { IStore } from 'redux/types';
-import { SET_BEER_LIST_ACTION } from 'redux/action-types';
-import { IBeerListAction } from 'redux/reducers/list';
+import { IStore, IBeerListAction } from 'redux/types';
+import { setBeerListAction } from 'redux/action';
 import { connect, ConnectedProps } from 'react-redux';
 import Api from 'Api/beer';
 
@@ -13,7 +12,7 @@ const mapState = (state: IStore) => ({
 });
 
 const mapDispatch = {
-  setList: (list: IBeerListAction['payload']): IBeerListAction => ({ type: SET_BEER_LIST_ACTION, payload: list }),
+  setList: (list: IBeerListAction['payload']) => setBeerListAction(list),
 };
 
 const connector = connect(mapState, mapDispatch);
