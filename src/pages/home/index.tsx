@@ -5,14 +5,15 @@ import { List, ListItem, CircularProgress, Typography, Box } from '@material-ui/
 import { IStore } from 'redux/types';
 import { getBeerList } from 'redux/action';
 import { connect, ConnectedProps } from 'react-redux';
-import { AnyAction, Dispatch } from 'redux';
+import { Action } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 const mapState = (state: IStore) => ({
   beerList: state.beerList,
 });
 
-const mapDispatch = (dispatch: Dispatch<AnyAction>) => ({
-  getList: () => dispatch<any>(getBeerList()),
+const mapDispatch = (dispatch: ThunkDispatch<IStore, void, Action>) => ({
+  getList: () => dispatch(getBeerList()),
 });
 
 const connector = connect(mapState, mapDispatch);
