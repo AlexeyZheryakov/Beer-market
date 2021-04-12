@@ -4,24 +4,13 @@ import { List, ListItem, CircularProgress, Typography, Box } from '@material-ui/
 
 import { IStore } from 'redux/types';
 import { getBeerList } from 'redux/action';
-import { connect, ConnectedProps } from 'react-redux';
-import { Action } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
+import { useSelector, useDispatch } from 'react-redux';
 
-const mapState = (state: IStore) => ({
-  beerList: state.beerList,
-});
-
-const mapDispatch = (dispatch: ThunkDispatch<IStore, void, Action>) => ({
-  getList: () => dispatch(getBeerList()),
-});
-
-const connector = connect(mapState, mapDispatch);
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-const Home: React.FC<PropsFromRedux> = ({ beerList, getList }) => {
+const Home: React.FC = () => {
+  const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
+  const dispatch = useDispatch();
   React.useEffect(() => {
-    getList();
+    dispatch(getBeerList());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -43,5 +32,4 @@ const Home: React.FC<PropsFromRedux> = ({ beerList, getList }) => {
   );
 };
 
-// функция высшего порядка которая подключает компонент к redux store
-export default connector(Home);
+export default Home;
