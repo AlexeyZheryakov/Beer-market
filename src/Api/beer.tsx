@@ -30,7 +30,6 @@ export interface IBeerDTO {
 }
 
 const Api = {
-  // eslint-disable-next-line no-console
   getBeer: () => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers`),
 };
 
