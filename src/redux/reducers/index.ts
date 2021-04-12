@@ -3,7 +3,7 @@ import beerListReducer from './list';
 import otherReducer from './other';
 
 const rootReducer = combineReducers({
-  list: beerListReducer,
+  beerList: beerListReducer,
   other: otherReducer,
 });
 
