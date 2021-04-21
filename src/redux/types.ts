@@ -7,12 +7,14 @@ import { AxiosError } from 'axios';
  */
 export type AnyActionWithPayload<T> = Action & { payload: T };
 
-export interface IOtherAction {
-  type: string;
-}
-
 interface IBeerList {
   items: Array<IBeerDTO>;
+  loading?: boolean;
+  error?: AxiosError;
+}
+
+interface IDetailsBeer {
+  item: IBeerDTO;
   loading?: boolean;
   error?: AxiosError;
 }
@@ -20,4 +22,5 @@ interface IBeerList {
 export interface IStore {
   beerList: IBeerList;
   other: string;
+  detailsBeer: IDetailsBeer;
 }
