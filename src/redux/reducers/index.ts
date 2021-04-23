@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import beerListReducer from './list';
-import detailsBeerReducer from './details';
+import beerListReducer from './beerList/reducer';
+import detailsBeerReducer from './beerDetails/reducer';
 
 const rootReducer = combineReducers({
   beerList: beerListReducer,

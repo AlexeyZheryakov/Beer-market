@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { List, ListItem, CircularProgress, Typography, Box } from '@material-ui/core';
+import { List, CircularProgress, Typography, Box } from '@material-ui/core';
 
 import { IStore } from 'redux/types';
-import { getDetailsBeerList } from 'redux/action';
+import { getDetailsBeer } from 'redux/reducers/beerDetails/actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Details: React.FC = () => {
@@ -12,7 +12,7 @@ const Details: React.FC = () => {
   const detailsBeer: IStore['detailsBeer'] = useSelector<IStore, IStore['detailsBeer']>((state) => state.detailsBeer);
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(getDetailsBeerList(id));
+    dispatch(getDetailsBeer(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -24,10 +24,10 @@ const Details: React.FC = () => {
       )}
       {detailsBeer.error && <Typography>Произошла ошибка</Typography>}
       <List>
-        <ListItem key={detailsBeer.item.id}>
-          {detailsBeer.item.id} {detailsBeer.item.name} {detailsBeer.item.id} {detailsBeer.item.food_pairing}
-          <img alt="img" src={detailsBeer.item.image_url} />
-        </ListItem>
+        {detailsBeer.item.id} {detailsBeer.item.name}
+        {detailsBeer.item.description} {detailsBeer.item.tagline}
+        {detailsBeer.item.contributed_by} {detailsBeer.item.attenuation_level} {detailsBeer.item.first_brewed}
+        <img alt="img" src={detailsBeer.item.image_url} />
       </List>
     </>
   );

@@ -3,8 +3,8 @@ import {
   SET_BEER_LIST_ACTION_NAME,
   START_GETTING_BEER_LIST_ACTION_NAME,
   ERROR_GETTING_BEER_LIST_ACTION_NAME,
-} from '../action';
-import { IStore, AnyActionWithPayload } from '../types';
+} from 'redux/reducers/beerList/actions';
+import { IStore, AnyActionWithPayload } from 'redux/types';
 
 interface IBeerListPayload {
   list: Array<IBeerDTO>;

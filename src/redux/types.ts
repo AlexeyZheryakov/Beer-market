@@ -7,16 +7,16 @@ import { AxiosError } from 'axios';
  */
 export type AnyActionWithPayload<T> = Action & { payload: T };
 
-interface IBeerList {
-  items: Array<IBeerDTO>;
+interface IRemoteData {
   loading?: boolean;
   error?: AxiosError;
 }
+interface IBeerList extends IRemoteData {
+  items: Array<IBeerDTO>;
+}
 
-interface IDetailsBeer {
+interface IDetailsBeer extends IRemoteData {
   item: IBeerDTO;
-  loading?: boolean;
-  error?: AxiosError;
 }
 
 export interface IStore {
