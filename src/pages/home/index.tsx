@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { List, ListItem, CircularProgress, Typography, Box } from '@material-ui/core';
 
 import { IStore } from 'redux/types';
-import { getBeerList } from 'redux/action';
+import { getBeerList } from 'redux/reducers/beerList/actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Home: React.FC = () => {
