@@ -6,8 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Typography } from '@material-ui/core';
 import useStyles from 'pages/details/styles';
+import { IBeerDTO } from 'Api/beer';
 
-export default function CenteredTabs(props: any) {
+export default function CenteredTabs(props: IBeerDTO) {
   const {
     description,
     brewers_tips,

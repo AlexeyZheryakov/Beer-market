@@ -34,55 +34,59 @@ const Home: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <Box className={classes.root} p={1}>
-      <form className={classes.form} noValidate autoComplete="off">
-        <TextField
-          className={classes.textField}
-          color="secondary"
-          id="outlined-basic"
-          label="Please input text"
-          variant="outlined"
-          size="small"
-        />
-        <Button color="primary" variant="contained">
-          Search
-        </Button>
-      </form>
+    <>
       {beerList.loading && (
-        <Box p={4}>
+        <Box p={10}>
           <CircularProgress />
         </Box>
       )}
       {beerList.error && <Typography>Произошла ошибка</Typography>}
-      <Grid container spacing={2} className={classes.gridContainer}>
-        {beerList.items.map((beer) => (
-          <Grid item key={beer.id} xs={12} sm={6} md={4}>
-            <Card className={classes.card}>
-              <CardHeader title={beer.name} />
-              <CardContent>
-                <img className={classes.img} src={beer.image_url} alt="img" />
-                <Typography>{beer.name}</Typography>
-                <Typography>{beer.description}</Typography>
-              </CardContent>
-              <CardActions className={classes.cardActions}>
-                <IconButton>
-                  <StarBorderIcon className={classes.icons} />
-                </IconButton>
-                <IconButton>
-                  <AddShoppingCartIcon className={classes.icons} />
-                </IconButton>
-                <IconButton>
-                  <ShoppingCartIcon className={classes.icons} />
-                </IconButton>
-                <Link className={classes.buttonLink} to={routes.details(String(beer.id))}>
-                  <Button variant="outlined">Details...</Button>
-                </Link>
-              </CardActions>
-            </Card>
+      {!beerList.loading && (
+        <Box className={classes.root} p={1}>
+          <form className={classes.form} noValidate autoComplete="off">
+            <TextField
+              className={classes.textField}
+              color="secondary"
+              id="outlined-basic"
+              label="Please input text"
+              variant="outlined"
+              size="small"
+            />
+            <Button color="primary" variant="contained">
+              Search
+            </Button>
+          </form>
+          <Grid container spacing={2} className={classes.gridContainer}>
+            {beerList.items.map((beer) => (
+              <Grid item key={beer.id} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardHeader title={beer.name} />
+                  <CardContent>
+                    <img className={classes.img} src={beer.image_url} alt="img" />
+                    <Typography>{beer.name}</Typography>
+                    <Typography>{beer.description}</Typography>
+                  </CardContent>
+                  <CardActions className={classes.cardActions}>
+                    <IconButton>
+                      <StarBorderIcon className={classes.icons} />
+                    </IconButton>
+                    <IconButton>
+                      <AddShoppingCartIcon className={classes.icons} />
+                    </IconButton>
+                    <IconButton>
+                      <ShoppingCartIcon className={classes.icons} />
+                    </IconButton>
+                    <Link className={classes.buttonLink} to={routes.details(String(beer.id))}>
+                      <Button variant="outlined">Details...</Button>
+                    </Link>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-    </Box>
+        </Box>
+      )}
+    </>
   );
 };
 

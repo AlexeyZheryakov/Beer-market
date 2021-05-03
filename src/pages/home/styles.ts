@@ -4,13 +4,13 @@ import { theme } from 'App';
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: 'gainsboro',
-    marginTop: '35px',
+    marginTop: theme.spacing(4.5),
   },
   img: {
     padding: theme.spacing(1),
     float: 'left',
     width: 'auto',
-    height: '400px',
+    height: 400,
     marginRight: theme.spacing(2),
   },
   textField: {
@@ -22,14 +22,14 @@ const useStyles = makeStyles(() => ({
   },
   form: {
     backgroundColor: 'gainsboro',
-    marginTop: '20px',
+    marginTop: theme.spacing(2.5),
   },
   card: {
     display: 'flex',
     flexDirection: 'column',
   },
   icons: {
-    fontSize: '40',
+    fontSize: 40,
   },
   buttonLink: {
     textDecoration: 'none',
