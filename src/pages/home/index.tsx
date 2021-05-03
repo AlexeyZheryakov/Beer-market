@@ -4,13 +4,29 @@ import Button from '@material-ui/core/Button';
 import routes from 'routes';
 import { Link } from 'react-router-dom';
 
-import { List, ListItem, CircularProgress, Typography, Box } from '@material-ui/core';
+import {
+  CircularProgress,
+  Typography,
+  Box,
+  Grid,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  IconButton,
+} from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import { IStore } from 'redux/types';
 import { getBeerList } from 'redux/reducers/beerList/actions';
 import { useSelector, useDispatch } from 'react-redux';
+import useStyles from 'pages/home/styles';
 
 const Home: React.FC = () => {
+  const classes = useStyles();
   const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
   const dispatch = useDispatch();
   React.useEffect(() => {
@@ -20,21 +36,56 @@ const Home: React.FC = () => {
   return (
     <>
       {beerList.loading && (
-        <Box p={4}>
+        <Box p={10}>
           <CircularProgress />
         </Box>
       )}
       {beerList.error && <Typography>Произошла ошибка</Typography>}
-      <List>
-        {beerList.items.map((beer) => (
-          <ListItem key={beer.id}>
-            {beer.name} {beer.id}
-            <Link to={routes.details(String(beer.id))}>
-              <Button variant="contained">Details</Button>
-            </Link>
-          </ListItem>
-        ))}
-      </List>
+      {!beerList.loading && (
+        <Box className={classes.root} p={1}>
+          <form className={classes.form} noValidate autoComplete="off">
+            <TextField
+              className={classes.textField}
+              color="secondary"
+              id="outlined-basic"
+              label="Please input text"
+              variant="outlined"
+              size="small"
+            />
+            <Button color="primary" variant="contained">
+              Search
+            </Button>
+          </form>
+          <Grid container spacing={2} className={classes.gridContainer}>
+            {beerList.items.map((beer) => (
+              <Grid item key={beer.id} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardHeader title={beer.name} />
+                  <CardContent>
+                    <img className={classes.img} src={beer.image_url} alt="img" />
+                    <Typography>{beer.name}</Typography>
+                    <Typography>{beer.description}</Typography>
+                  </CardContent>
+                  <CardActions className={classes.cardActions}>
+                    <IconButton>
+                      <StarBorderIcon className={classes.icons} />
+                    </IconButton>
+                    <IconButton>
+                      <AddShoppingCartIcon className={classes.icons} />
+                    </IconButton>
+                    <IconButton>
+                      <ShoppingCartIcon className={classes.icons} />
+                    </IconButton>
+                    <Link className={classes.buttonLink} to={routes.details(String(beer.id))}>
+                      <Button variant="outlined">Details...</Button>
+                    </Link>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
     </>
   );
 };
