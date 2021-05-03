@@ -21,41 +21,41 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 
 import { IStore } from 'redux/types';
-import { getDetailsBeer } from 'redux/reducers/beerDetails/actions';
+import { getBeerDetails } from 'redux/reducers/beerDetails/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/details/styles';
 
 const Details: React.FC = () => {
   const classes = useStyles();
   const { id } = useParams<{ id: string }>();
-  const detailsBeer: IStore['detailsBeer'] = useSelector<IStore, IStore['detailsBeer']>((state) => state.detailsBeer);
+  const beerDetails: IStore['beerDetails'] = useSelector<IStore, IStore['beerDetails']>((state) => state.beerDetails);
   const dispatch = useDispatch();
-  const tabs = CenteredTabs(detailsBeer.item);
+  const tabs = CenteredTabs(beerDetails.item);
   React.useEffect(() => {
-    dispatch(getDetailsBeer(id));
+    dispatch(getBeerDetails(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
-      {detailsBeer.loading && (
+      {beerDetails.loading && (
         <Box p={10}>
           <CircularProgress />
         </Box>
       )}
-      {detailsBeer.error && <Typography>Произошла ошибка</Typography>}
-      {!detailsBeer.loading && (
+      {beerDetails.error && <Typography>Произошла ошибка</Typography>}
+      {!beerDetails.loading && (
         <Box className={classes.root}>
           <Card>
-            <CardHeader title={detailsBeer.item.name} />
+            <CardHeader title={beerDetails.item.name} />
             <Divider />
             <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
               <Link className={classes.buttonLink} color="inherit" to={routes.main()}>
                 Catalog
               </Link>
-              <Typography color="textPrimary">{detailsBeer.item.name}</Typography>
+              <Typography color="textPrimary">{beerDetails.item.name}</Typography>
             </Breadcrumbs>
             <div className={classes.flex}>
-              <img className={classes.img} src={detailsBeer.item.image_url} alt="img" />
+              <img className={classes.img} src={beerDetails.item.image_url} alt="img" />
               <div className={classes.div}>
                 {tabs}
                 <CardActions className={classes.cardActions}>

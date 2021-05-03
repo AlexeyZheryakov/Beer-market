@@ -66,7 +66,7 @@ export interface IBeerDTO {
 
 const Api = {
   getBeer: () => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers`),
-  getDetailsBeer: (id: string) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers/${id}`),
+  getBeerDetails: (id: string) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers/${id}`),
 };
 
 export default Api;

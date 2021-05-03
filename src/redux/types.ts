@@ -15,12 +15,12 @@ interface IBeerList extends IRemoteData {
   items: Array<IBeerDTO>;
 }
 
-interface IDetailsBeer extends IRemoteData {
+interface IBeerDetails extends IRemoteData {
   item: IBeerDTO;
 }
 
 export interface IStore {
   beerList: IBeerList;
   other: string;
-  detailsBeer: IDetailsBeer;
+  beerDetails: IBeerDetails;
 }
