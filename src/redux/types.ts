@@ -19,8 +19,16 @@ interface IBeerDetails extends IRemoteData {
   item: IBeerDTO;
 }
 
+interface ICartBeer extends IBeerDTO {
+  count: number;
+}
+
+interface ICartReducer {
+  items: Array<ICartBeer>;
+}
+
 export interface IStore {
   beerList: IBeerList;
-  other: string;
   beerDetails: IBeerDetails;
+  beerCart: ICartReducer;
 }

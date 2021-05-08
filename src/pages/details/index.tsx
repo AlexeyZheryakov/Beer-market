@@ -13,7 +13,7 @@ import {
   Box,
   CardActions,
   Button,
-  ButtonGroup,
+  TextField,
 } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -26,6 +26,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/details/styles';
 
 const Details: React.FC = () => {
+  const [count, setCount] = React.useState(0);
+  const validValue = (value: number) => {
+    if (value > 99) setCount(99);
+    else if (value < 1) setCount(1);
+    else setCount(value);
+  };
   const classes = useStyles();
   const { id } = useParams<{ id: string }>();
   const beerDetails: IStore['beerDetails'] = useSelector<IStore, IStore['beerDetails']>((state) => state.beerDetails);
@@ -59,15 +65,16 @@ const Details: React.FC = () => {
               <div className={classes.div}>
                 {tabs}
                 <CardActions className={classes.cardActions}>
-                  <ButtonGroup disableElevation variant="contained">
-                    <Button className={classes.button} variant="outlined">
-                      <AddIcon />
-                    </Button>
-                    <Button className={classes.button} variant="outlined">
-                      <RemoveIcon />
-                    </Button>
-                  </ButtonGroup>
-                  <Typography>6</Typography>
+                  <TextField
+                    onChange={(e) => validValue(Number(e.target.value))}
+                    inputProps={{ min: 1, max: 99 }}
+                    type="number"
+                    id="outlined-size-small"
+                    defaultValue="Small"
+                    variant="outlined"
+                    size="small"
+                  />
+                  <Typography>{count}</Typography>
                   <Button variant="contained" className={classes.button} startIcon={<AddCircleOutlineIcon />}>
                     Add To Card
                   </Button>
