@@ -17,25 +17,26 @@ import {
 } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
 
-import { IStore } from 'redux/types';
+import { IStore, ICartBeer } from 'redux/types';
 import { getBeerDetails } from 'redux/reducers/beerDetails/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/details/styles';
+import { addBeerToCartAction } from 'redux/reducers/cart/actions';
 
 const Details: React.FC = () => {
-  const [count, setCount] = React.useState(0);
+  const [quantity, setQuantity] = React.useState(0);
   const validValue = (value: number) => {
-    if (value > 99) setCount(99);
-    else if (value < 1) setCount(1);
-    else setCount(value);
+    if (value > 99) setQuantity(99);
+    else if (value < 1) setQuantity(1);
+    else setQuantity(value);
   };
   const classes = useStyles();
   const { id } = useParams<{ id: string }>();
   const beerDetails: IStore['beerDetails'] = useSelector<IStore, IStore['beerDetails']>((state) => state.beerDetails);
+  const cartBeer: ICartBeer = { ...beerDetails.item, count: quantity };
   const dispatch = useDispatch();
+  const HandleAddToCartClick = () => dispatch(addBeerToCartAction(cartBeer));
   const tabs = CenteredTabs(beerDetails.item);
   React.useEffect(() => {
     dispatch(getBeerDetails(id));
@@ -74,13 +75,19 @@ const Details: React.FC = () => {
                     variant="outlined"
                     size="small"
                   />
-                  <Typography>{count}</Typography>
-                  <Button variant="contained" className={classes.button} startIcon={<AddCircleOutlineIcon />}>
+                  <Button
+                    onClick={HandleAddToCartClick}
+                    variant="contained"
+                    className={classes.button}
+                    startIcon={<AddCircleOutlineIcon />}
+                  >
                     Add To Card
                   </Button>
-                  <Button variant="contained" className={classes.button} startIcon={<ShoppingCartIcon />}>
-                    Go To Cart
-                  </Button>
+                  <Link className={classes.buttonLink} to={routes.cart()}>
+                    <Button variant="contained" className={classes.button} startIcon={<ShoppingCartIcon />}>
+                      Go To Cart
+                    </Button>
+                  </Link>
                 </CardActions>
               </div>
             </div>

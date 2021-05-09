@@ -19,7 +19,7 @@ interface IBeerDetails extends IRemoteData {
   item: IBeerDTO;
 }
 
-interface ICartBeer extends IBeerDTO {
+export interface ICartBeer extends IBeerDTO {
   count: number;
 }
 
