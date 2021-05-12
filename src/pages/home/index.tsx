@@ -73,9 +73,11 @@ const Home: React.FC = () => {
                     <IconButton>
                       <AddShoppingCartIcon className={classes.icons} />
                     </IconButton>
-                    <IconButton>
-                      <ShoppingCartIcon className={classes.icons} />
-                    </IconButton>
+                    <Link to={routes.cart()}>
+                      <IconButton>
+                        <ShoppingCartIcon className={classes.icons} />
+                      </IconButton>
+                    </Link>
                     <Link className={classes.buttonLink} to={routes.details(String(beer.id))}>
                       <Button variant="outlined">Details...</Button>
                     </Link>

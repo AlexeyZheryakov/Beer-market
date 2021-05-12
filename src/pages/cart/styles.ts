@@ -3,20 +3,33 @@ import { theme } from 'App';
 
 const useStyles = makeStyles(() => ({
   root: {
-    marginTop: theme.spacing(6),
-  },
-  breadcrumbs: {
-    padding: theme.spacing(3),
+    backgroundColor: 'gainsboro',
+    marginTop: theme.spacing(4.5),
   },
   img: {
     padding: theme.spacing(1),
     float: 'left',
     width: 'auto',
-    height: 600,
+    height: 400,
     marginRight: theme.spacing(2),
   },
-  flex: {
+  textField: {
+    width: '60%',
+    marginRight: theme.spacing(1),
+  },
+  gridContainer: {
+    marginTop: theme.spacing(1),
+  },
+  form: {
+    backgroundColor: 'gainsboro',
+    marginTop: theme.spacing(2.5),
+  },
+  card: {
     display: 'flex',
+    flexDirection: 'column',
+  },
+  icons: {
+    fontSize: 40,
   },
   buttonLink: {
     textDecoration: 'none',
@@ -24,23 +37,9 @@ const useStyles = makeStyles(() => ({
   cardActions: {
     display: 'flex',
     justifyContent: 'space-around',
-    maxWidth: 800,
   },
-  button: {
-    backgroundColor: 'white',
-  },
-  div: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  divTabs: {
-    flexDirection: 'column',
-    display: 'flex',
-    flex: 2,
-  },
-  typography: {
-    padding: theme.spacing(2.5),
-    maxWidth: 600,
+  breadcrumbs: {
+    padding: theme.spacing(3),
   },
 }));
 

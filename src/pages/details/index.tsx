@@ -25,7 +25,7 @@ import useStyles from 'pages/details/styles';
 import { addBeerToCartAction } from 'redux/reducers/cart/actions';
 
 const Details: React.FC = () => {
-  const [quantity, setQuantity] = React.useState(0);
+  const [quantity, setQuantity] = React.useState(1);
   const validValue = (value: number) => {
     if (value > 99) setQuantity(99);
     else if (value < 1) setQuantity(1);
@@ -88,6 +88,9 @@ const Details: React.FC = () => {
                       Go To Cart
                     </Button>
                   </Link>
+                  <Button color="primary" variant="contained">
+                    Search
+                  </Button>
                 </CardActions>
               </div>
             </div>
