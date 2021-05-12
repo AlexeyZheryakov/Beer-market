@@ -23,8 +23,13 @@ export interface ICartBeer extends IBeerDTO {
   count: number;
 }
 
+export interface ISelectedIds {
+  [key: string]: number;
+}
+
 interface ICartReducer {
   items: Array<ICartBeer>;
+  selectedIds: ISelectedIds;
 }
 
 export interface IStore {

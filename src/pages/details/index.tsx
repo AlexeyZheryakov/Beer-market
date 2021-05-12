@@ -88,9 +88,6 @@ const Details: React.FC = () => {
                       Go To Cart
                     </Button>
                   </Link>
-                  <Button color="primary" variant="contained">
-                    Search
-                  </Button>
                 </CardActions>
               </div>
             </div>
