@@ -17,8 +17,9 @@ import {
 } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
-import { IStore, ICartBeer } from 'redux/types';
+import { IStore, ICartBeer, ISelectedIds } from 'redux/types';
 import { getBeerDetails } from 'redux/reducers/beerDetails/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/details/styles';
@@ -31,13 +32,14 @@ const Details: React.FC = () => {
     else if (value < 1) setQuantity(1);
     else setQuantity(value);
   };
-  const classes = useStyles();
+  const cartBeerFromRedux: IStore['beerCart'] = useSelector<IStore, IStore['beerCart']>((state) => state.beerCart);
   const { id } = useParams<{ id: string }>();
   const beerDetails: IStore['beerDetails'] = useSelector<IStore, IStore['beerDetails']>((state) => state.beerDetails);
   const cartBeer: ICartBeer = { ...beerDetails.item, count: quantity };
   const dispatch = useDispatch();
   const HandleAddToCartClick = () => dispatch(addBeerToCartAction(cartBeer));
   const tabs = CenteredTabs(beerDetails.item);
+  const classes = useStyles();
   React.useEffect(() => {
     dispatch(getBeerDetails(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,14 +77,26 @@ const Details: React.FC = () => {
                     variant="outlined"
                     size="small"
                   />
-                  <Button
-                    onClick={HandleAddToCartClick}
-                    variant="contained"
-                    className={classes.button}
-                    startIcon={<AddCircleOutlineIcon />}
-                  >
-                    Add To Card
-                  </Button>
+                  {!cartBeerFromRedux.selectedIds[beerDetails.item.id] && (
+                    <Button
+                      onClick={HandleAddToCartClick}
+                      variant="contained"
+                      className={classes.button}
+                      startIcon={<AddCircleOutlineIcon />}
+                    >
+                      Add To Card
+                    </Button>
+                  )}
+                  {cartBeerFromRedux.selectedIds[beerDetails.item.id] && (
+                    <Button
+                      onClick={HandleAddToCartClick}
+                      variant="contained"
+                      className={classes.button}
+                      startIcon={<RemoveCircleOutlineIcon />}
+                    >
+                      Delete From Cart
+                    </Button>
+                  )}
                   <Link className={classes.buttonLink} to={routes.cart()}>
                     <Button variant="contained" className={classes.button} startIcon={<ShoppingCartIcon />}>
                       Go To Cart
