@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
     padding: theme.spacing(1),
     float: 'left',
     width: 'auto',
-    height: 600,
+    height: 400,
     marginRight: theme.spacing(2),
   },
   flex: {

@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     padding: theme.spacing(1),
     float: 'left',
     width: 'auto',
-    height: 400,
+    height: 300,
     marginRight: theme.spacing(2),
   },
   textField: {
@@ -37,6 +37,13 @@ const useStyles = makeStyles(() => ({
   cardActions: {
     display: 'flex',
     justifyContent: 'space-around',
+  },
+  description: {
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'pre-line',
+    width: 'auto',
+    height: 260,
   },
 }));
 

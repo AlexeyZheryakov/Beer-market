@@ -64,7 +64,7 @@ const Home: React.FC = () => {
                   <CardContent>
                     <img className={classes.img} src={beer.image_url} alt="img" />
                     <Typography>{beer.name}</Typography>
-                    <Typography>{beer.description}</Typography>
+                    <Typography className={classes.description}>{beer.description}</Typography>
                   </CardContent>
                   <CardActions className={classes.cardActions}>
                     <IconButton>

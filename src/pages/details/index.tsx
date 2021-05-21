@@ -23,7 +23,7 @@ import { IStore, ICartBeer, ISelectedIds } from 'redux/types';
 import { getBeerDetails } from 'redux/reducers/beerDetails/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/details/styles';
-import { addBeerToCartAction } from 'redux/reducers/cart/actions';
+import { addBeerToCartAction, removeBeerFromCartAction } from 'redux/reducers/cart/actions';
 
 const Details: React.FC = () => {
   const [quantity, setQuantity] = React.useState(1);
@@ -38,6 +38,7 @@ const Details: React.FC = () => {
   const cartBeer: ICartBeer = { ...beerDetails.item, count: quantity };
   const dispatch = useDispatch();
   const HandleAddToCartClick = () => dispatch(addBeerToCartAction(cartBeer));
+  const HandleRemoveFromCartClick = () => dispatch(removeBeerFromCartAction(cartBeer));
   const tabs = CenteredTabs(beerDetails.item);
   const classes = useStyles();
   React.useEffect(() => {
@@ -89,12 +90,12 @@ const Details: React.FC = () => {
                   )}
                   {cartBeerFromRedux.selectedIds[beerDetails.item.id] && (
                     <Button
-                      onClick={HandleAddToCartClick}
+                      onClick={HandleRemoveFromCartClick}
                       variant="contained"
                       className={classes.button}
                       startIcon={<RemoveCircleOutlineIcon />}
                     >
-                      Delete From Cart
+                      Remove From Cart
                     </Button>
                   )}
                   <Link className={classes.buttonLink} to={routes.cart()}>
