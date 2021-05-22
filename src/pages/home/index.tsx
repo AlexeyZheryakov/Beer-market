@@ -22,6 +22,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import { IStore } from 'redux/types';
 import { getBeerList } from 'redux/reducers/beerList/actions';
+import { incrementCountBeerToCartAction } from 'redux/reducers/cart/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/home/styles';
 
@@ -29,6 +30,7 @@ const Home: React.FC = () => {
   const classes = useStyles();
   const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
   const dispatch = useDispatch();
+  const HandleIncrementCountBeer = (cartBeer: any) => dispatch(incrementCountBeerToCartAction(cartBeer));
   React.useEffect(() => {
     dispatch(getBeerList());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,7 +72,7 @@ const Home: React.FC = () => {
                     <IconButton>
                       <StarBorderIcon className={classes.icons} />
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={() => HandleIncrementCountBeer(beer)}>
                       <AddShoppingCartIcon className={classes.icons} />
                     </IconButton>
                     <Link to={routes.cart()}>

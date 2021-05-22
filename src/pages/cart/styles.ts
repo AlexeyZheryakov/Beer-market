@@ -4,13 +4,13 @@ import { theme } from 'App';
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: 'gainsboro',
-    marginTop: theme.spacing(4.5),
+    marginTop: theme.spacing(6),
   },
   img: {
     padding: theme.spacing(1),
     float: 'left',
     width: 'auto',
-    height: 400,
+    height: 200,
     marginRight: theme.spacing(2),
   },
   textField: {
