@@ -19,7 +19,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
-import { IStore, ICartBeer, ISelectedIds } from 'redux/types';
+import { IStore, ICartBeer } from 'redux/types';
 import { getBeerDetails } from 'redux/reducers/beerDetails/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/details/styles';
