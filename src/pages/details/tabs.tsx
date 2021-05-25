@@ -4,7 +4,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Typography } from '@material-ui/core';
+import { Typography, List, ListItem } from '@material-ui/core';
 import useStyles from 'pages/details/styles';
 import { IBeerDTO } from 'Api/beer';
 
@@ -48,12 +48,12 @@ export default function CenteredTabs(props: IBeerDTO) {
         </Typography>
       )}
       {value === 4 && (
-        <Typography className={classes.typography}>
-          Attenuation level: {attenuation_level} <br />
-          Contributed by: {contributed_by} <br />
-          First brewed: {first_brewed} <br />
-          PH: {ph}
-        </Typography>
+        <List>
+          <ListItem>Attenuation level: {attenuation_level}</ListItem>
+          <ListItem>Contributed by: {contributed_by}</ListItem>
+          <ListItem>First brewed: {first_brewed}</ListItem>
+          <ListItem>PH: {ph}</ListItem>
+        </List>
       )}
     </div>
   );

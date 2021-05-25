@@ -13,24 +13,34 @@ import {
   Box,
   CardActions,
   Button,
-  ButtonGroup,
+  TextField,
 } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
-import { IStore } from 'redux/types';
+import { IStore, ICartBeer } from 'redux/types';
 import { getBeerDetails } from 'redux/reducers/beerDetails/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/details/styles';
+import { addBeerToCartAction, removeBeerFromCartAction } from 'redux/reducers/cart/actions';
 
 const Details: React.FC = () => {
-  const classes = useStyles();
+  const [quantity, setQuantity] = React.useState(1);
+  const validValue = (value: number) => {
+    if (value > 99) setQuantity(99);
+    else if (value < 1) setQuantity(1);
+    else setQuantity(value);
+  };
+  const cartBeerFromRedux: IStore['beerCart'] = useSelector<IStore, IStore['beerCart']>((state) => state.beerCart);
   const { id } = useParams<{ id: string }>();
   const beerDetails: IStore['beerDetails'] = useSelector<IStore, IStore['beerDetails']>((state) => state.beerDetails);
+  const cartBeer: ICartBeer = { ...beerDetails.item, count: quantity };
   const dispatch = useDispatch();
+  const handleAddToCartClick = () => dispatch(addBeerToCartAction(cartBeer));
+  const handleRemoveFromCartClick = () => dispatch(removeBeerFromCartAction(cartBeer));
   const tabs = CenteredTabs(beerDetails.item);
+  const classes = useStyles();
   React.useEffect(() => {
     dispatch(getBeerDetails(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,21 +69,40 @@ const Details: React.FC = () => {
               <div className={classes.div}>
                 {tabs}
                 <CardActions className={classes.cardActions}>
-                  <ButtonGroup disableElevation variant="contained">
-                    <Button className={classes.button} variant="outlined">
-                      <AddIcon />
+                  <TextField
+                    onChange={(e) => validValue(Number(e.target.value))}
+                    inputProps={{ min: 1, max: 99 }}
+                    type="number"
+                    id="beer-details-count-input"
+                    defaultValue="1"
+                    variant="outlined"
+                    size="small"
+                  />
+                  {!cartBeerFromRedux.selectedIds[beerDetails.item.id] && (
+                    <Button
+                      onClick={handleAddToCartClick}
+                      variant="contained"
+                      className={classes.button}
+                      startIcon={<AddCircleOutlineIcon />}
+                    >
+                      Add To Card
                     </Button>
-                    <Button className={classes.button} variant="outlined">
-                      <RemoveIcon />
+                  )}
+                  {cartBeerFromRedux.selectedIds[beerDetails.item.id] && (
+                    <Button
+                      onClick={handleRemoveFromCartClick}
+                      variant="contained"
+                      className={classes.button}
+                      startIcon={<RemoveCircleOutlineIcon />}
+                    >
+                      Remove From Cart
                     </Button>
-                  </ButtonGroup>
-                  <Typography>6</Typography>
-                  <Button variant="contained" className={classes.button} startIcon={<AddCircleOutlineIcon />}>
-                    Add To Card
-                  </Button>
-                  <Button variant="contained" className={classes.button} startIcon={<ShoppingCartIcon />}>
-                    Go To Cart
-                  </Button>
+                  )}
+                  <Link className={classes.buttonLink} to={routes.cart()}>
+                    <Button variant="contained" className={classes.button} startIcon={<ShoppingCartIcon />}>
+                      Go To Cart
+                    </Button>
+                  </Link>
                 </CardActions>
               </div>
             </div>

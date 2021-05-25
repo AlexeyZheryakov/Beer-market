@@ -14,9 +14,6 @@ export const errorGettingBeerListAction = () => createAction(ERROR_GETTING_BEER_
 
 export const setBeerListAction = (list: IBeerDTO[]) => createActionWithPayload(SET_BEER_LIST_ACTION_NAME, { list });
 
-export const setDetailsBeerListAction = (list: IBeerDTO) =>
-  createActionWithPayload(SET_BEER_LIST_ACTION_NAME, { list });
-
 export const getBeerList = (): ThunkAction<void, IStore, unknown, AnyAction> => async (dispatch) => {
   // до начала процесса получения данных запускаем экшен старта
   dispatch(startGettingBeerListAction());
