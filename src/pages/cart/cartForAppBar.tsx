@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IconButton, Box } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { IStore } from 'redux/types';
 import routes from 'routes';
@@ -12,11 +12,13 @@ export default function CartForAppBar() {
   const cartBeerFromRedux: IStore['beerCart'] = useSelector<IStore, IStore['beerCart']>((state) => state.beerCart);
   const cartLength = cartBeerFromRedux.items.length;
   return (
-    <Link className={classes.buttonLink} to={routes.cart()}>
-      <IconButton>
-        <ShoppingCartIcon />
-        <Box>{cartLength > 0 && cartLength}</Box>
-      </IconButton>
-    </Link>
+    <>
+      <Link className={classes.buttonLink} to={routes.cart()}>
+        <IconButton>
+          <ShoppingCartIcon />
+        </IconButton>
+      </Link>
+      {cartLength > 0 && <div className={classes.div}>{cartLength}</div>}
+    </>
   );
 }

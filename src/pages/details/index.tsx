@@ -37,8 +37,8 @@ const Details: React.FC = () => {
   const beerDetails: IStore['beerDetails'] = useSelector<IStore, IStore['beerDetails']>((state) => state.beerDetails);
   const cartBeer: ICartBeer = { ...beerDetails.item, count: quantity };
   const dispatch = useDispatch();
-  const HandleAddToCartClick = () => dispatch(addBeerToCartAction(cartBeer));
-  const HandleRemoveFromCartClick = () => dispatch(removeBeerFromCartAction(cartBeer));
+  const handleAddToCartClick = () => dispatch(addBeerToCartAction(cartBeer));
+  const handleRemoveFromCartClick = () => dispatch(removeBeerFromCartAction(cartBeer));
   const tabs = CenteredTabs(beerDetails.item);
   const classes = useStyles();
   React.useEffect(() => {
@@ -73,14 +73,14 @@ const Details: React.FC = () => {
                     onChange={(e) => validValue(Number(e.target.value))}
                     inputProps={{ min: 1, max: 99 }}
                     type="number"
-                    id="outlined-size-small"
-                    defaultValue="Small"
+                    id="beer-details-count-input"
+                    defaultValue="1"
                     variant="outlined"
                     size="small"
                   />
                   {!cartBeerFromRedux.selectedIds[beerDetails.item.id] && (
                     <Button
-                      onClick={HandleAddToCartClick}
+                      onClick={handleAddToCartClick}
                       variant="contained"
                       className={classes.button}
                       startIcon={<AddCircleOutlineIcon />}
@@ -90,7 +90,7 @@ const Details: React.FC = () => {
                   )}
                   {cartBeerFromRedux.selectedIds[beerDetails.item.id] && (
                     <Button
-                      onClick={HandleRemoveFromCartClick}
+                      onClick={handleRemoveFromCartClick}
                       variant="contained"
                       className={classes.button}
                       startIcon={<RemoveCircleOutlineIcon />}

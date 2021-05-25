@@ -21,6 +21,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import { IStore } from 'redux/types';
+import { IBeerDTO } from 'Api/beer';
 import { getBeerList } from 'redux/reducers/beerList/actions';
 import { incrementCountBeerToCartAction } from 'redux/reducers/cart/actions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -30,7 +31,7 @@ const Home: React.FC = () => {
   const classes = useStyles();
   const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
   const dispatch = useDispatch();
-  const HandleIncrementCountBeer = (cartBeer: any) => dispatch(incrementCountBeerToCartAction(cartBeer));
+  const handleIncrementCountBeer = (cartBeer: IBeerDTO) => () => dispatch(incrementCountBeerToCartAction(cartBeer));
   React.useEffect(() => {
     dispatch(getBeerList());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,7 +73,7 @@ const Home: React.FC = () => {
                     <IconButton>
                       <StarBorderIcon className={classes.icons} />
                     </IconButton>
-                    <IconButton onClick={() => HandleIncrementCountBeer(beer)}>
+                    <IconButton onClick={handleIncrementCountBeer(beer)}>
                       <AddShoppingCartIcon className={classes.icons} />
                     </IconButton>
                     <Link to={routes.cart()}>

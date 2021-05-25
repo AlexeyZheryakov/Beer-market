@@ -34,11 +34,8 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     margin: theme.spacing(1),
   },
-  grid: {
-    display: 'flex',
-  },
-  cart: {
-    marginRight: theme.spacing(4),
+  div: {
+    paddingRight: theme.spacing(3),
   },
 }));
 
@@ -49,11 +46,11 @@ export default function App() {
       <Router>
         <div className={classes.root}>
           <AppBar color="secondary">
-            <Grid className={classes.grid}>
+            <Grid container>
               <Typography className={classes.typography} variant="h5">
                 Beans Love Beers
               </Typography>
-              <Typography className={classes.cart}>{cartForAppBar()}</Typography>
+              <div className={classes.div}>{cartForAppBar()}</div>
             </Grid>
           </AppBar>
           <Switch>
