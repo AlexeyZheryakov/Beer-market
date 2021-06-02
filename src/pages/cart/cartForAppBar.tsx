@@ -18,7 +18,7 @@ export default function CartForAppBar() {
           <ShoppingCartIcon />
         </IconButton>
       </Link>
-      {cartLength > 0 && <div className={classes.div}>{cartLength}</div>}
+      {!!cartLength && <div className={classes.div}>{cartLength}</div>}
     </>
   );
 }

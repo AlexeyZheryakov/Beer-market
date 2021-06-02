@@ -71,9 +71,11 @@ const Cart: React.FC = () => {
         </CardContent>
         <CardActions className={classes.cardActions}>
           <Typography variant="h4">TOTAL:{totalPrice}$</Typography>
-          <Button color="primary" variant="contained">
-            Go to ordering
-          </Button>
+          <Link className={classes.buttonLink} to={routes.order()}>
+            <Button color="primary" variant="contained">
+              Go to ordering
+            </Button>
+          </Link>
         </CardActions>
       </Card>
     </>
