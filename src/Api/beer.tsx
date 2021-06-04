@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = '/api/v2';
+const BASE_URL = `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BEER_API_URL : '/'}api/v2`;
 
 interface IUnitValue {
   value: number;
