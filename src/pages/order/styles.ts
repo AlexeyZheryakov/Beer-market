@@ -42,6 +42,9 @@ const useStyles = makeStyles(() => ({
     padding: theme.spacing(2.5),
     maxWidth: 600,
   },
+  gridItemLabel: {
+    padding: '13px 0px 0px 0px',
+  },
 }));
 
 export default useStyles;
