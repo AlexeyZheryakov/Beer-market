@@ -43,7 +43,7 @@ const useStyles = makeStyles(() => ({
     maxWidth: 600,
   },
   gridItemLabel: {
-    padding: '13px 0px 0px 0px',
+    padding: '16px 0px 0px 0px',
   },
 }));
 
