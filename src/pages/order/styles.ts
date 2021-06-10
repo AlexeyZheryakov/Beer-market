@@ -43,7 +43,10 @@ const useStyles = makeStyles(() => ({
     maxWidth: 600,
   },
   gridItemLabel: {
-    padding: '16px 0px 0px 0px',
+    padding: '17px 0px 0px 0px',
+  },
+  gridItemLabelDate: {
+    padding: '20px 0px 0px 0px',
   },
 }));
 

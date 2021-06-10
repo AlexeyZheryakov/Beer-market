@@ -12,12 +12,17 @@ import {
   CardActions,
   Button,
 } from '@material-ui/core';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 import { Link } from 'react-router-dom';
 import routes from 'routes';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import InputMask from 'react-input-mask';
 
 const Order: React.FC = () => {
+  const defaultDate = new Date();
+  defaultDate.setDate(defaultDate.getDate() + 2);
   const classes = useStyles();
   const nameRegex = /^[a-zA-Z]+$/;
   const validationsShema = yup.object().shape({
@@ -28,10 +33,8 @@ const Order: React.FC = () => {
     cardNumber: yup.number().typeError('Only numbers').required('Required field'),
     street: yup.string().required('Required field').matches(nameRegex, 'Street is not valid'),
     houseNumber: yup.number().typeError('Only numbers').required('Required field'),
+    date: yup.date().typeError('Date is not valid').min(defaultDate, 'Date is not valid'),
   });
-  const data = new Date();
-  const chislo = data.getDate();
-  data.setDate(chislo + 2);
   return (
     <Formik
       initialValues={{
@@ -42,6 +45,7 @@ const Order: React.FC = () => {
         cardNumber: '',
         street: '',
         houseNumber: '',
+        date: defaultDate,
       }}
       validateOnBlur
       onSubmit={(values) => {
@@ -49,7 +53,7 @@ const Order: React.FC = () => {
       }}
       validationSchema={validationsShema}
     >
-      {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
+      {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty, setFieldValue }) => (
         <>
           <Card className={classes.root}>
             <CardHeader title="Ordering" />
@@ -105,18 +109,17 @@ const Order: React.FC = () => {
                     <Typography>Phone</Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    <TextField
-                      helperText={errors.phone}
-                      error={Boolean(touched.phone && errors.phone)}
-                      value={values.phone}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      name="phone"
-                      fullWidth
-                      id="phone-order"
-                      size="small"
-                      label="Phone"
-                    />
+                    <InputMask onBlur={handleBlur} mask="+7 999 999 99 99" value={values.phone} onChange={handleChange}>
+                      <TextField
+                        helperText={errors.phone}
+                        error={Boolean(touched.phone && errors.phone)}
+                        name="phone"
+                        fullWidth
+                        id="phone-order"
+                        size="small"
+                        label="Phone"
+                      />
+                    </InputMask>
                   </Grid>
                 </Grid>
                 <Grid container item>
@@ -143,23 +146,28 @@ const Order: React.FC = () => {
                     <Typography>Card number</Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    <TextField
-                      helperText={errors.cardNumber}
-                      error={Boolean(touched.cardNumber && errors.cardNumber)}
-                      value={values.cardNumber}
+                    <InputMask
                       onBlur={handleBlur}
+                      mask="9999 9999 9999 9999"
+                      value={values.cardNumber}
                       onChange={handleChange}
-                      name="cardNumber"
-                      fullWidth
-                      id="card-number-order"
-                      size="small"
-                      label="Card number"
-                    />
+                    >
+                      <TextField
+                        helperText={errors.cardNumber}
+                        error={Boolean(touched.cardNumber && errors.cardNumber)}
+                        value={values.cardNumber}
+                        name="cardNumber"
+                        fullWidth
+                        id="card-number-order"
+                        size="small"
+                        label="Card number"
+                      />
+                    </InputMask>
                   </Grid>
                 </Grid>
                 <Grid container item>
                   <Grid className={classes.gridItemLabel} item xs={1}>
-                    <Typography>Address</Typography>
+                    <Typography>Adress</Typography>
                   </Grid>
                   <Grid item xs={2}>
                     <TextField
@@ -186,6 +194,28 @@ const Order: React.FC = () => {
                       size="small"
                       label="House number"
                     />
+                  </Grid>
+                </Grid>
+                <Grid container item>
+                  <Grid className={classes.gridItemLabelDate} item xs={1}>
+                    <Typography>Dete</Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <KeyboardDatePicker
+                        helperText={errors.date}
+                        name="date"
+                        fullWidth
+                        margin="normal"
+                        id="date-order"
+                        format="dd.MM.yyyy"
+                        value={values.date}
+                        onChange={(e) => setFieldValue('date', e)}
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date',
+                        }}
+                      />
+                    </MuiPickersUtilsProvider>
                   </Grid>
                 </Grid>
               </Grid>
