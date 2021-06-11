@@ -19,6 +19,7 @@ import routes from 'routes';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import InputMask from 'react-input-mask';
+import initialValues from 'pages/order/constants';
 
 const Order: React.FC = () => {
   const defaultDate = new Date();
@@ -33,20 +34,11 @@ const Order: React.FC = () => {
     cardNumber: yup.number().typeError('Only numbers').required('Required field'),
     street: yup.string().required('Required field').matches(nameRegex, 'Street is not valid'),
     houseNumber: yup.number().typeError('Only numbers').required('Required field'),
-    date: yup.date().typeError('Date is not valid').min(defaultDate, 'Date is not valid'),
+    date: yup.date().typeError('Date is not valid').min(defaultDate, 'Date is not valid').required('Required field'),
   });
   return (
     <Formik
-      initialValues={{
-        name: '',
-        lastName: '',
-        phone: '',
-        email: '',
-        cardNumber: '',
-        street: '',
-        houseNumber: '',
-        date: defaultDate,
-      }}
+      initialValues={initialValues}
       validateOnBlur
       onSubmit={(values) => {
         console.log(values);
@@ -66,13 +58,13 @@ const Order: React.FC = () => {
             </Breadcrumbs>
             <CardContent>
               <Grid container spacing={2}>
-                <Grid container item>
+                <Grid className={classes.gridHeight} container item>
                   <Grid className={classes.gridItemLabel} item xs={1}>
                     <Typography>Name</Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <TextField
-                      helperText={errors.name}
+                      helperText={touched.name && errors.name}
                       error={Boolean(touched.name && errors.name)}
                       value={values.name}
                       onBlur={handleBlur}
@@ -85,13 +77,13 @@ const Order: React.FC = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container item>
+                <Grid className={classes.gridHeight} container item>
                   <Grid className={classes.gridItemLabel} item xs={1}>
                     <Typography>Last name</Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <TextField
-                      helperText={errors.lastName}
+                      helperText={touched.lastName && errors.lastName}
                       error={Boolean(touched.lastName && errors.lastName)}
                       value={values.lastName}
                       onBlur={handleBlur}
@@ -104,14 +96,14 @@ const Order: React.FC = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container item>
+                <Grid className={classes.gridHeight} container item>
                   <Grid className={classes.gridItemLabel} item xs={1}>
                     <Typography>Phone</Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <InputMask onBlur={handleBlur} mask="+7 999 999 99 99" value={values.phone} onChange={handleChange}>
                       <TextField
-                        helperText={errors.phone}
+                        helperText={touched.phone && errors.phone}
                         error={Boolean(touched.phone && errors.phone)}
                         name="phone"
                         fullWidth
@@ -122,13 +114,13 @@ const Order: React.FC = () => {
                     </InputMask>
                   </Grid>
                 </Grid>
-                <Grid container item>
+                <Grid className={classes.gridHeight} container item>
                   <Grid className={classes.gridItemLabel} item xs={1}>
                     <Typography>Email</Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <TextField
-                      helperText={errors.email}
+                      helperText={touched.email && errors.email}
                       error={Boolean(touched.email && errors.email)}
                       value={values.email}
                       onBlur={handleBlur}
@@ -141,7 +133,7 @@ const Order: React.FC = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container item>
+                <Grid className={classes.gridHeight} container item>
                   <Grid className={classes.gridItemLabel} item xs={1}>
                     <Typography>Card number</Typography>
                   </Grid>
@@ -153,7 +145,7 @@ const Order: React.FC = () => {
                       onChange={handleChange}
                     >
                       <TextField
-                        helperText={errors.cardNumber}
+                        helperText={touched.cardNumber && errors.cardNumber}
                         error={Boolean(touched.cardNumber && errors.cardNumber)}
                         value={values.cardNumber}
                         name="cardNumber"
@@ -165,13 +157,13 @@ const Order: React.FC = () => {
                     </InputMask>
                   </Grid>
                 </Grid>
-                <Grid container item>
+                <Grid className={classes.gridHeight} container item>
                   <Grid className={classes.gridItemLabel} item xs={1}>
                     <Typography>Adress</Typography>
                   </Grid>
                   <Grid item xs={2}>
                     <TextField
-                      helperText={errors.street}
+                      helperText={touched.street && errors.street}
                       error={Boolean(touched.street && errors.street)}
                       value={values.street}
                       onBlur={handleBlur}
@@ -184,7 +176,7 @@ const Order: React.FC = () => {
                   </Grid>
                   <Grid item xs={1}>
                     <TextField
-                      helperText={errors.houseNumber}
+                      helperText={touched.houseNumber && errors.houseNumber}
                       error={Boolean(touched.houseNumber && errors.houseNumber)}
                       value={values.houseNumber}
                       onBlur={handleBlur}
@@ -196,13 +188,14 @@ const Order: React.FC = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container item>
+                <Grid className={classes.gridHeight} container item>
                   <Grid className={classes.gridItemLabelDate} item xs={1}>
-                    <Typography>Dete</Typography>
+                    <Typography>Date</Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <KeyboardDatePicker
+                        error={Boolean(errors.date)}
                         helperText={errors.date}
                         name="date"
                         fullWidth

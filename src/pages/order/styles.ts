@@ -48,6 +48,9 @@ const useStyles = makeStyles(() => ({
   gridItemLabelDate: {
     padding: '20px 0px 0px 0px',
   },
+  gridHeight: {
+    height: '70px',
+  },
 }));
 
 export default useStyles;
