@@ -6,10 +6,18 @@ import routes from 'routes';
 import { Formik } from 'formik';
 import constants from 'pages/order/constants';
 import OrderForm from 'pages/order/orderForm';
+import Values from 'pages/order/types';
+import { format } from 'date-fns';
 
 const Order: React.FC = () => {
-  const defaultDate = new Date();
-  defaultDate.setDate(defaultDate.getDate() + 2);
+  function changeDateFormat(values: Values) {
+    const { date } = values;
+    const dateFormat = format(date, 'dd-MM-yy');
+    const newValues = { ...values, date: dateFormat };
+    // eslint-disable-next-line no-console
+    console.log(newValues);
+  }
+
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -26,7 +34,7 @@ const Order: React.FC = () => {
           initialValues={constants.initialValues}
           validateOnBlur
           onSubmit={(values) => {
-            console.log(values);
+            changeDateFormat(values);
           }}
           validationSchema={constants.validationsShema}
         >
