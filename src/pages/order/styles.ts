@@ -8,39 +8,17 @@ const useStyles = makeStyles(() => ({
   breadcrumbs: {
     padding: theme.spacing(3),
   },
-  img: {
-    padding: theme.spacing(1),
-    float: 'left',
-    width: 'auto',
-    height: 600,
-    marginRight: theme.spacing(2),
-  },
-  flex: {
-    display: 'flex',
-  },
   buttonLink: {
     textDecoration: 'none',
   },
-  cardActions: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    maxWidth: 800,
+  gridItemLabel: {
+    padding: '17px 0px 0px 0px',
   },
-  button: {
-    backgroundColor: 'white',
+  gridItemLabelDate: {
+    padding: '20px 0px 0px 0px',
   },
-  div: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  divTabs: {
-    flexDirection: 'column',
-    display: 'flex',
-    flex: 2,
-  },
-  typography: {
-    padding: theme.spacing(2.5),
-    maxWidth: 600,
+  gridHeight: {
+    height: '70px',
   },
 }));
 
