@@ -4,19 +4,19 @@ import { Card, CardHeader, Breadcrumbs, Typography, Divider, CardContent } from 
 import { Link } from 'react-router-dom';
 import routes from 'routes';
 import { Formik } from 'formik';
-import constants from 'pages/order/constants';
+import { initialValues, validationsShema } from 'pages/order/constants';
 import OrderForm from 'pages/order/orderForm';
 import Values from 'pages/order/types';
 import { format } from 'date-fns';
 
 const Order: React.FC = () => {
-  function changeDateFormat(values: Values) {
+  const handleSubmitClick = (values: Values) => {
     const { date } = values;
-    const dateFormat = format(date, 'dd-MM-yy');
-    const newValues = { ...values, date: dateFormat };
+    const formatedDate = format(date, 'dd-MM-yy');
+    const dataForSending = { ...values, date: formatedDate };
     // eslint-disable-next-line no-console
-    console.log(newValues);
-  }
+    console.log(dataForSending);
+  };
 
   const classes = useStyles();
   return (
@@ -31,12 +31,10 @@ const Order: React.FC = () => {
       </Breadcrumbs>
       <CardContent>
         <Formik
-          initialValues={constants.initialValues}
+          initialValues={initialValues}
           validateOnBlur
-          onSubmit={(values) => {
-            changeDateFormat(values);
-          }}
-          validationSchema={constants.validationsShema}
+          onSubmit={handleSubmitClick}
+          validationSchema={validationsShema}
         >
           {OrderForm}
         </Formik>
