@@ -11,7 +11,7 @@ import Values from 'pages/order/types';
 export default function OrderForm(props: FormikProps<Values>) {
   const { values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty, setFieldValue } = props;
   const classes = useStyles();
-  const minDateOrder = add(new Date(), { days: 2 });
+  const minOrderDate = add(new Date(), { days: 2 });
   return (
     <form onSubmit={handleSubmit}>
       <Grid container spacing={2}>
@@ -147,7 +147,7 @@ export default function OrderForm(props: FormikProps<Values>) {
           <Grid item xs={3}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
-                minDate={minDateOrder}
+                minDate={minOrderDate}
                 error={Boolean(errors.date)}
                 helperText={errors.date}
                 name="date"
