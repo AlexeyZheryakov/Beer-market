@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Category } from 'pages/home';
 
 const BASE_URL = `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BEER_API_URL : '/api/'}v2`;
 
@@ -65,7 +66,7 @@ export interface IBeerDTO {
 }
 
 const Api = {
-  getBeer: () => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers`),
+  getBeer: (params: Category = {}) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers`, { params }),
   getBeerDetails: (id: string) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers/${id}`),
 };
 

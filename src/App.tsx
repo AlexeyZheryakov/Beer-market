@@ -2,11 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Сart from 'pages/cart';
 import Home from 'pages/home';
+import Cat from 'pages/category';
 import Details from 'pages/details';
 import Order from 'pages/order';
 import routes from 'routes';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Layout from 'layout';
+import Layout from 'components/layout';
 
 export const theme = createMuiTheme({
   palette: {
@@ -42,6 +43,9 @@ export default function App() {
             </Route>
             <Route path={routes.main()}>
               <Home />
+            </Route>
+            <Route path={routes.category()}>
+              <Cat />
             </Route>
           </Switch>
         </Layout>

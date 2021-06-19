@@ -3,6 +3,7 @@ import { AnyAction } from 'redux';
 import Api, { IBeerDTO } from 'Api/beer';
 import { IStore } from 'redux/types';
 import { createAction, createActionWithPayload } from 'redux/utils';
+import { Category } from 'pages/home';
 
 export const SET_BEER_LIST_ACTION_NAME = 'SET_BEER_LIST_ACTION';
 export const START_GETTING_BEER_LIST_ACTION_NAME = 'START_GETTING_BEER_LIST_ACTION_NAME';
@@ -14,11 +15,11 @@ export const errorGettingBeerListAction = () => createAction(ERROR_GETTING_BEER_
 
 export const setBeerListAction = (list: IBeerDTO[]) => createActionWithPayload(SET_BEER_LIST_ACTION_NAME, { list });
 
-export const getBeerList = (): ThunkAction<void, IStore, unknown, AnyAction> => async (dispatch) => {
+export const getBeerList = (props: Category): ThunkAction<void, IStore, unknown, AnyAction> => async (dispatch) => {
   // до начала процесса получения данных запускаем экшен старта
   dispatch(startGettingBeerListAction());
   try {
-    const { data } = await Api.getBeer();
+    const { data } = await Api.getBeer(props);
     // setTimeout нужен что бы замедлить получения данных для отображения загрузки
     setTimeout(() => {
       dispatch(setBeerListAction(data));

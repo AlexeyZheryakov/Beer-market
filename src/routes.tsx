@@ -1,8 +1,9 @@
 const routes = {
   main: () => '/',
-  details: (id = ':id') => `/details/${id}`,
-  order: () => '/order',
-  cart: () => '/cart',
+  category: (category = ':category') => `/${category}`,
+  details: (id = ':id', category: string = ':category') => `/${category}/details/${id}`,
+  order: (category: string = ':category') => `/${category}/order`,
+  cart: (category: string = ':category') => `/${category}/cart`,
 };
 
 export default routes;

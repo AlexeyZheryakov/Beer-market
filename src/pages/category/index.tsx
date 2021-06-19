@@ -52,7 +52,7 @@ export interface Category {
   [key: string]: number;
 }
 
-const Home: React.FC = () => {
+const Cat: React.FC = () => {
   const { category } = useParams<{ category: string }>();
   const classes = useStyles();
   const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
@@ -121,4 +121,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Cat;
