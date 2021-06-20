@@ -1,9 +1,7 @@
 import React from 'react';
-
 import Button from '@material-ui/core/Button';
 import routes from 'routes';
 import { Link, useParams } from 'react-router-dom';
-
 import {
   CircularProgress,
   Typography,
@@ -26,31 +24,7 @@ import { getBeerList } from 'redux/reducers/beerList/actions';
 import { incrementCountBeerToCartAction } from 'redux/reducers/cart/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/home/styles';
-
-const config: Config = {
-  lightBeer: {
-    abv_lt: 3,
-  },
-  regularBeer: {
-    abv_gt: 3,
-    abv_lt: 6,
-  },
-  strongBeer: {
-    abv_gt: 6,
-    abv_lt: 20,
-  },
-  veryStrongBeer: {
-    abv_gt: 20,
-  },
-};
-
-interface Config {
-  [key: string]: Category;
-}
-
-export interface Category {
-  [key: string]: number;
-}
+import config from 'components/menu/config';
 
 const Home: React.FC = () => {
   const { category } = useParams<{ category: string }>();
@@ -102,12 +76,12 @@ const Home: React.FC = () => {
                     <IconButton onClick={handleIncrementCountBeer(beer)}>
                       <AddShoppingCartIcon className={classes.icons} />
                     </IconButton>
-                    <Link to={routes.cart()}>
+                    <Link to={routes.cart(category)}>
                       <IconButton>
                         <ShoppingCartIcon className={classes.icons} />
                       </IconButton>
                     </Link>
-                    <Link className={classes.buttonLink} to={routes.details(String(beer.id))}>
+                    <Link className={classes.buttonLink} to={routes.details(String(beer.id), category)}>
                       <Button variant="outlined">Details...</Button>
                     </Link>
                   </CardActions>

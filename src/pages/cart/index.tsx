@@ -1,7 +1,7 @@
 import React from 'react';
 import useStyles from 'pages/cart/styles';
 import routes from 'routes';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -17,6 +17,7 @@ import { IStore } from 'redux/types';
 import { useSelector } from 'react-redux';
 
 const Cart: React.FC = () => {
+  const { category } = useParams<{ category: string }>();
   const classes = useStyles();
   const beerCart: IStore['beerCart'] = useSelector<IStore, IStore['beerCart']>((state) => state.beerCart);
   const totalCount = Object.values(beerCart.selectedIds).reduce((total, count) => total + count, 0);
@@ -28,7 +29,7 @@ const Cart: React.FC = () => {
         <CardHeader title="Cart" />
         <Divider />
         <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
-          <Link className={classes.buttonLink} color="inherit" to={routes.main()}>
+          <Link className={classes.buttonLink} color="inherit" to={routes.main(category)}>
             Catalog
           </Link>
           <Typography color="textPrimary">Cart</Typography>
@@ -71,7 +72,7 @@ const Cart: React.FC = () => {
         </CardContent>
         <CardActions className={classes.cardActions}>
           <Typography variant="h4">TOTAL:{totalPrice}$</Typography>
-          <Link className={classes.buttonLink} to={routes.order()}>
+          <Link className={classes.buttonLink} to={routes.order(category)}>
             <Button color="primary" variant="contained">
               Go to ordering
             </Button>

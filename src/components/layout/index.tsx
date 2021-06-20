@@ -1,10 +1,9 @@
 import React from 'react';
-import { AppBar, Typography, Grid, List, ListItem } from '@material-ui/core';
+import { AppBar, Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { theme } from 'App';
-import cartForAppBar from 'pages/cart/cartForAppBar';
-import routes from 'routes';
-import { Link } from 'react-router-dom';
+import CartForAppBar from 'pages/cart/cartForAppBar';
+import Menu from 'components/menu';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -36,24 +35,12 @@ const Layout = (props: LayoutProps) => {
           <Typography className={classes.typography} variant="h5">
             Beans Love Beers
           </Typography>
-          <div className={classes.div}>{cartForAppBar()}</div>
+          <div className={classes.div}>
+            <CartForAppBar />
+          </div>
         </Grid>
       </AppBar>
-      <List>
-        <ListItem>123</ListItem>
-        <Link className={classes.buttonLink} to={routes.category('lightBeer')}>
-          <ListItem button> Light Beer</ListItem>
-        </Link>
-        <Link className={classes.buttonLink} to={routes.category('regularBeer')}>
-          <ListItem button> Regular Beer </ListItem>
-        </Link>
-        <Link className={classes.buttonLink} to={routes.category('strongBeer')}>
-          <ListItem button> Strong Beer </ListItem>
-        </Link>
-        <Link className={classes.buttonLink} to={routes.category('veryStrongBeer')}>
-          <ListItem button> Very Strong Beer </ListItem>
-        </Link>
-      </List>
+      <Menu />
       {children}
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import useStyles from 'pages/order/styles';
 import { Card, CardHeader, Breadcrumbs, Typography, Divider, CardContent } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import routes from 'routes';
 import { Formik } from 'formik';
 import { initialValues, validationsShema } from 'pages/order/constants';
@@ -10,6 +10,7 @@ import Values from 'pages/order/types';
 import { format } from 'date-fns';
 
 const Order: React.FC = () => {
+  const { category } = useParams<{ category: string }>();
   const handleSubmitClick = (values: Values) => {
     const { date } = values;
     const formatedDate = format(date, 'dd-MM-yy');
@@ -24,7 +25,7 @@ const Order: React.FC = () => {
       <CardHeader title="Ordering" />
       <Divider />
       <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
-        <Link className={classes.buttonLink} color="inherit" to={routes.main()}>
+        <Link className={classes.buttonLink} color="inherit" to={routes.main(category)}>
           Catalog
         </Link>
         <Typography color="textPrimary">Ordering</Typography>
