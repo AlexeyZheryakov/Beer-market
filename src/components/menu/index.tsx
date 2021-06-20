@@ -3,20 +3,9 @@ import { List, ListItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import routes from 'routes';
 import { Link, Redirect, useLocation } from 'react-router-dom';
-import { theme } from 'App';
 import constants from 'components/menu/constants';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-  },
-  typography: {
-    flexGrow: 1,
-    margin: theme.spacing(1),
-  },
-  div: {
-    paddingRight: theme.spacing(3),
-  },
   buttonLink: {
     textDecoration: 'none',
     color: 'black',
