@@ -1,3 +1,7 @@
+export interface IConstants {
+	[key: string]: string;
+}
+
 export interface IConfig {
   [key: string]: ICategory;
 }
