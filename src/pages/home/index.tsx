@@ -25,15 +25,19 @@ import { incrementCountBeerToCartAction } from 'redux/reducers/cart/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/home/styles';
 import config from 'components/menu/config';
+import { IConfig } from 'components/menu/types';
+import constants from 'components/menu/constants';
 
 const Home: React.FC = () => {
+  const [search, setSearch] = React.useState('');
+  const configuration: IConfig = config(search);
   const { category } = useParams<{ category: string }>();
   const classes = useStyles();
   const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
   const dispatch = useDispatch();
   const handleIncrementCountBeer = (cartBeer: IBeerDTO) => () => dispatch(incrementCountBeerToCartAction(cartBeer));
   React.useEffect(() => {
-    dispatch(getBeerList(config[category]));
+    dispatch(getBeerList(configuration[category]));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [useParams()]);
   return (
@@ -46,8 +50,9 @@ const Home: React.FC = () => {
       {beerList.error && <Typography>Произошла ошибка</Typography>}
       {!beerList.loading && (
         <Box className={classes.root} p={1}>
-          <form className={classes.form} noValidate autoComplete="off">
+          <div className={classes.form}>
             <TextField
+              onChange={(e) => setSearch(e.target.value)}
               className={classes.textField}
               color="secondary"
               id="search"
@@ -55,15 +60,17 @@ const Home: React.FC = () => {
               variant="outlined"
               size="small"
             />
-            <Button color="primary" variant="contained">
-              Search
-            </Button>
-          </form>
+            <Link className={classes.buttonLink} to={routes.main(constants.search)}>
+              <Button color="primary" variant="contained">
+                Search
+              </Button>
+            </Link>
+          </div>
           <Grid container spacing={2} className={classes.gridContainer}>
             {beerList.items.map((beer) => (
               <Grid item key={beer.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardHeader variant="h1" title={beer.name} />
+                  <CardHeader className={classes.cardHeder} title={beer.name} />
                   <CardContent>
                     <img className={classes.img} src={beer.image_url} alt="img" />
                     <Typography>{beer.name}</Typography>

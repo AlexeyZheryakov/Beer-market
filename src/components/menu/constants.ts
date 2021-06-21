@@ -23,6 +23,7 @@ const constants: IConstants = {
   darkCopper: 'darkCopper',
   brown: 'brown',
   darkBrown: 'darkBrown',
+  search: 'search',
 };
 
 export default constants;

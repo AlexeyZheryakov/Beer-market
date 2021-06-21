@@ -45,6 +45,9 @@ const useStyles = makeStyles(() => ({
     width: 'auto',
     height: 260,
   },
+  cardHeder: {
+    height: 64,
+  },
 }));
 
 export default useStyles;

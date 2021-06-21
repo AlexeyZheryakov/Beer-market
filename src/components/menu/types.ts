@@ -7,5 +7,5 @@ export interface IConfig {
 }
 
 export default interface ICategory {
-  [key: string]: number;
+  [key: string]: string;
 }
