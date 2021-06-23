@@ -17,7 +17,6 @@ import TextField from '@material-ui/core/TextField';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
 import { IStore } from 'redux/types';
 import { IBeerDTO } from 'Api/beer';
 import { getBeerList } from 'redux/reducers/beerList/actions';
@@ -25,21 +24,18 @@ import { incrementCountBeerToCartAction } from 'redux/reducers/cart/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/home/styles';
 import config from 'components/menu/config';
-import { IConfig } from 'components/menu/types';
-import constants from 'components/menu/constants';
 
 const Home: React.FC = () => {
   const [search, setSearch] = React.useState('');
-  const configuration: IConfig = config(search);
   const { category } = useParams<{ category: string }>();
   const classes = useStyles();
   const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
   const dispatch = useDispatch();
   const handleIncrementCountBeer = (cartBeer: IBeerDTO) => () => dispatch(incrementCountBeerToCartAction(cartBeer));
   React.useEffect(() => {
-    dispatch(getBeerList(configuration[category]));
+    dispatch(getBeerList(config[category] ? config[category].query : { beer_name: category }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [useParams()]);
+  }, [category]);
   return (
     <>
       {beerList.loading && (
@@ -55,12 +51,12 @@ const Home: React.FC = () => {
               onChange={(e) => setSearch(e.target.value)}
               className={classes.textField}
               color="secondary"
-              id="search"
+              id="search-page-home"
               label="Please input text"
               variant="outlined"
               size="small"
             />
-            <Link className={classes.buttonLink} to={routes.main(constants.search)}>
+            <Link className={classes.buttonLink} to={routes.main(search)}>
               <Button color="primary" variant="contained">
                 Search
               </Button>

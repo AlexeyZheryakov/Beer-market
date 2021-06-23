@@ -7,16 +7,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import useStyles from 'components/layout/styles';
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-const Layout = (props: LayoutProps) => {
+const Layout: React.FC = ({ children }) => {
   const [open, setOpen] = React.useState(true);
   const handleClick = () => {
     setOpen(!open);
   };
-  const { children } = props;
   const classes = useStyles();
   return (
     <div className={classes.root}>
