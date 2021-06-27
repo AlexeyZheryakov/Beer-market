@@ -1,39 +1,37 @@
-export interface IConfig {
-  beerStrength: ICategory;
-  lightBeer: ICategoryWithQuery;
-  regularBeer: ICategoryWithQuery;
-  strongBeer: ICategoryWithQuery;
-  veryStrongBeer: ICategoryWithQuery;
-  bitternessOfBeer: ICategory;
-  americanLightLager: ICategoryWithQuery
-  scottishAle: ICategoryWithQuery;
-  porter: ICategoryWithQuery;
-  englishBitter: ICategoryWithQuery;
-  stout: ICategoryWithQuery;
-  indiaPaleAle: ICategoryWithQuery;
-  barleywine: ICategoryWithQuery;
-  doubleOrImperial: ICategoryWithQuery;
-  colours: ICategory;
-  pale: ICategoryWithQuery;
-  lightBlond: ICategoryWithQuery;
-  blond: ICategoryWithQuery;
-  yellow: ICategoryWithQuery;
-  gold: ICategoryWithQuery;
-  amber: ICategoryWithQuery;
-  copper: ICategoryWithQuery;
-  darkCopper: ICategoryWithQuery;
-  brown: ICategoryWithQuery;
-  darkBrown: ICategoryWithQuery;
+import { TBeerListParams } from 'Api/beer';
+
+export interface IBeerStrengthСonfig {
+  lightBeer: ICategory;
+  regularBeer: ICategory;
+  strongBeer: ICategory;
+  veryStrongBeer: ICategory;
 }
 
-interface ICategory {
-  disabled: boolean,
-  label: string,
-}
-interface ICategoryWithQuery extends ICategory {
-  query : IQuery;
+export interface IBitternessOfBeerСonfig {
+  americanLightLager: ICategory;
+  scottishAle: ICategory;
+  porter: ICategory;
+  englishBitter: ICategory;
+  stout: ICategory;
+  indiaPaleAle: ICategory;
+  barleywine: ICategory;
+  doubleOrImperial: ICategory;
 }
 
-export default interface IQuery {
-  [key: string]: number;
+export interface IColoursConfig {
+  pale: ICategory;
+  lightBlond: ICategory;
+  blond: ICategory;
+  yellow: ICategory;
+  gold: ICategory;
+  amber: ICategory;
+  copper: ICategory;
+  darkCopper: ICategory;
+  brown: ICategory;
+  darkBrown: ICategory;
+}
+
+export default interface ICategory {
+  label: string;
+  query: TBeerListParams;
 }

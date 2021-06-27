@@ -23,7 +23,8 @@ import { getBeerList } from 'redux/reducers/beerList/actions';
 import { incrementCountBeerToCartAction } from 'redux/reducers/cart/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/home/styles';
-import config from 'components/menu/config';
+import { beerStrengthСonfig, bitternessOfBeerСonfig, coloursConfig } from 'components/menu/config';
+import { IBeerStrengthСonfig, IBitternessOfBeerСonfig, IColoursConfig } from 'components/menu/types';
 
 const Home: React.FC = () => {
   const [search, setSearch] = React.useState('');
@@ -33,7 +34,13 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
   const handleIncrementCountBeer = (cartBeer: IBeerDTO) => () => dispatch(incrementCountBeerToCartAction(cartBeer));
   React.useEffect(() => {
-    dispatch(getBeerList(config[category] ? config[category].query : { beer_name: category }));
+    if (beerStrengthСonfig[category as keyof IBeerStrengthСonfig]) {
+      dispatch(getBeerList(beerStrengthСonfig[category as keyof IBeerStrengthСonfig].query));
+    } else if (bitternessOfBeerСonfig[category as keyof IBitternessOfBeerСonfig]) {
+      dispatch(getBeerList(bitternessOfBeerСonfig[category as keyof IBitternessOfBeerСonfig].query));
+    } else if (coloursConfig[category as keyof IColoursConfig]) {
+      dispatch(getBeerList(coloursConfig[category as keyof IColoursConfig].query));
+    } else dispatch(getBeerList({ beer_name: category }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
   return (

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import IQuery from 'components/menu/types';
 
 const BASE_URL = `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BEER_API_URL : '/api/'}v2`;
 
@@ -65,8 +64,20 @@ export interface IBeerDTO {
   ingredients: IIngredients;
 }
 
+enum ParamsNames {
+  abv_gt = 'abv_gt',
+  abv_lt = 'abv_lt',
+  ibu_gt = 'ibu_gt',
+  ibu_lt = 'ibu_lt',
+  ebc_gt = 'ebc_gt',
+  ebc_lt = 'ebc_lt',
+  beer_name = 'beer_name',
+}
+
+export type TBeerListParams = Partial<Record<ParamsNames, string | number>>;
+
 const Api = {
-  getBeer: (params: IQuery = {}) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers`, { params }),
+  getBeer: (params: TBeerListParams = {}) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers`, { params }),
   getBeerDetails: (id: string) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers/${id}`),
 };
 
