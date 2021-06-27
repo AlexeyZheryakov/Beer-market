@@ -33,14 +33,12 @@ const Home: React.FC = () => {
   const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
   const dispatch = useDispatch();
   const handleIncrementCountBeer = (cartBeer: IBeerDTO) => () => dispatch(incrementCountBeerToCartAction(cartBeer));
+  const currentGroup =
+    beerStrengthСonfig[category as keyof IBeerStrengthСonfig] ||
+    bitternessOfBeerСonfig[category as keyof IBitternessOfBeerСonfig] ||
+    coloursConfig[category as keyof IColoursConfig];
   React.useEffect(() => {
-    if (beerStrengthСonfig[category as keyof IBeerStrengthСonfig]) {
-      dispatch(getBeerList(beerStrengthСonfig[category as keyof IBeerStrengthСonfig].query));
-    } else if (bitternessOfBeerСonfig[category as keyof IBitternessOfBeerСonfig]) {
-      dispatch(getBeerList(bitternessOfBeerСonfig[category as keyof IBitternessOfBeerСonfig].query));
-    } else if (coloursConfig[category as keyof IColoursConfig]) {
-      dispatch(getBeerList(coloursConfig[category as keyof IColoursConfig].query));
-    } else dispatch(getBeerList({ beer_name: category }));
+    dispatch(getBeerList(currentGroup ? currentGroup.query : { beer_name: category }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
   return (

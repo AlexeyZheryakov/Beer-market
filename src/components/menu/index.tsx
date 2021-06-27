@@ -21,27 +21,27 @@ const Menu: React.FC = () => {
     <>
       {pathname === '/' && <Redirect to="/lightBeer" />}
       <List>
-        <ListItem key="beerStrength">Beer Strength</ListItem>
-        {Object.keys(beerStrengthСonfig).map((item) => (
-          <Link key={item} className={classes.buttonLink} to={routes.main(item)}>
-            <ListItem selected={selected === item} button>
-              {beerStrengthСonfig[item as keyof IBeerStrengthСonfig].label}
+        <ListItem>Beer Strength</ListItem>
+        {Object.keys(beerStrengthСonfig).map((categoryName) => (
+          <Link key={categoryName} className={classes.buttonLink} to={routes.main(categoryName)}>
+            <ListItem selected={selected === categoryName} button>
+              {beerStrengthСonfig[categoryName as keyof IBeerStrengthСonfig].label}
             </ListItem>
           </Link>
         ))}
-        <ListItem key="bitternessOfBeer">Bitterness Of Beer</ListItem>
-        {Object.keys(bitternessOfBeerСonfig).map((item) => (
-          <Link key={item} className={classes.buttonLink} to={routes.main(item)}>
-            <ListItem selected={selected === item} button>
-              {bitternessOfBeerСonfig[item as keyof IBitternessOfBeerСonfig].label}
+        <ListItem>Bitterness Of Beer</ListItem>
+        {Object.keys(bitternessOfBeerСonfig).map((categoryName) => (
+          <Link key={categoryName} className={classes.buttonLink} to={routes.main(categoryName)}>
+            <ListItem selected={selected === categoryName} button>
+              {bitternessOfBeerСonfig[categoryName as keyof IBitternessOfBeerСonfig].label}
             </ListItem>
           </Link>
         ))}
-        <ListItem key="colours">Colours</ListItem>
-        {Object.keys(coloursConfig).map((item) => (
-          <Link key={item} className={classes.buttonLink} to={routes.main(item)}>
-            <ListItem selected={selected === item} button>
-              {coloursConfig[item as keyof IColoursConfig].label}
+        <ListItem>Colours</ListItem>
+        {Object.keys(coloursConfig).map((categoryName) => (
+          <Link key={categoryName} className={classes.buttonLink} to={routes.main(categoryName)}>
+            <ListItem selected={selected === categoryName} button>
+              {coloursConfig[categoryName as keyof IColoursConfig].label}
             </ListItem>
           </Link>
         ))}

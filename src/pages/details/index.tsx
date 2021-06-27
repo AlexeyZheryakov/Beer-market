@@ -98,7 +98,7 @@ const Details: React.FC = () => {
                       Remove From Cart
                     </Button>
                   )}
-                  <Link className={classes.buttonLink} to={routes.cart()}>
+                  <Link className={classes.buttonLink} to={routes.cart(category)}>
                     <Button variant="contained" className={classes.button} startIcon={<ShoppingCartIcon />}>
                       Go To Cart
                     </Button>
