@@ -5,9 +5,8 @@ import Home from 'pages/home';
 import Details from 'pages/details';
 import Order from 'pages/order';
 import routes from 'routes';
-import { AppBar, Typography, Grid } from '@material-ui/core';
-import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import cartForAppBar from 'pages/cart/cartForAppBar';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Layout from 'components/layout';
 
 export const theme = createMuiTheme({
   palette: {
@@ -26,33 +25,11 @@ export const theme = createMuiTheme({
   },
 });
 
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-  },
-  typography: {
-    flexGrow: 1,
-    margin: theme.spacing(1),
-  },
-  div: {
-    paddingRight: theme.spacing(3),
-  },
-}));
-
 export default function App() {
-  const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <div className={classes.root}>
-          <AppBar color="secondary">
-            <Grid container>
-              <Typography className={classes.typography} variant="h5">
-                Beans Love Beers
-              </Typography>
-              <div className={classes.div}>{cartForAppBar()}</div>
-            </Grid>
-          </AppBar>
+        <Layout>
           <Switch>
             <Route path={routes.order()}>
               <Order />
@@ -67,7 +44,7 @@ export default function App() {
               <Home />
             </Route>
           </Switch>
-        </div>
+        </Layout>
       </Router>
     </ThemeProvider>
   );

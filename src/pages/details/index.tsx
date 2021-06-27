@@ -33,7 +33,7 @@ const Details: React.FC = () => {
     else setQuantity(value);
   };
   const cartBeerFromRedux: IStore['beerCart'] = useSelector<IStore, IStore['beerCart']>((state) => state.beerCart);
-  const { id } = useParams<{ id: string }>();
+  const { id, category } = useParams<{ id: string; category: string }>();
   const beerDetails: IStore['beerDetails'] = useSelector<IStore, IStore['beerDetails']>((state) => state.beerDetails);
   const cartBeer: ICartBeer = { ...beerDetails.item, count: quantity };
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const Details: React.FC = () => {
             <CardHeader title={beerDetails.item.name} />
             <Divider />
             <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
-              <Link className={classes.buttonLink} color="inherit" to={routes.main()}>
+              <Link className={classes.buttonLink} color="inherit" to={routes.main(category)}>
                 Catalog
               </Link>
               <Typography color="textPrimary">{beerDetails.item.name}</Typography>
@@ -98,7 +98,7 @@ const Details: React.FC = () => {
                       Remove From Cart
                     </Button>
                   )}
-                  <Link className={classes.buttonLink} to={routes.cart()}>
+                  <Link className={classes.buttonLink} to={routes.cart(category)}>
                     <Button variant="contained" className={classes.button} startIcon={<ShoppingCartIcon />}>
                       Go To Cart
                     </Button>
