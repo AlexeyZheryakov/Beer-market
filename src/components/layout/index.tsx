@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import useStyles from 'components/layout/styles';
 
 const Layout: React.FC = ({ children }) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleClick = () => {
     setOpen(!open);
   };

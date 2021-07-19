@@ -48,6 +48,9 @@ const useStyles = makeStyles(() => ({
   cardHeder: {
     height: 64,
   },
+  box: {
+    textAlign: 'center',
+  },
 }));
 
 export default useStyles;

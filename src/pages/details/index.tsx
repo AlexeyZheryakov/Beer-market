@@ -48,8 +48,9 @@ const Details: React.FC = () => {
   return (
     <>
       {beerDetails.loading && (
-        <Box p={10}>
+        <Box className={classes.box} p={10}>
           <CircularProgress />
+          <Typography>Loading...</Typography>
         </Box>
       )}
       {beerDetails.error && <Typography>Произошла ошибка</Typography>}
