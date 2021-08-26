@@ -72,12 +72,13 @@ enum ParamsNames {
   ebc_gt = 'ebc_gt',
   ebc_lt = 'ebc_lt',
   beer_name = 'beer_name',
+  page = 'page',
 }
 
 export type TBeerListParams = Partial<Record<ParamsNames, string | number>>;
 
 const Api = {
-  getBeer: (params: TBeerListParams = {}) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers?per_page=24`, { params }),
+  getBeer: (params: TBeerListParams = {}) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers`, { params }),
   getBeerDetails: (id: string) => axios.get<Array<IBeerDTO>>(`${BASE_URL}/beers/${id}`),
 };
 
