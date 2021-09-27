@@ -11,20 +11,37 @@ interface IBeerListPayload {
   list: Array<IBeerDTO>;
 }
 
-function beerListReducer(state: IStore['beerList'] = { items: [] }, action: AnyActionWithPayload<IBeerListPayload>) {
+function beerListReducer(
+  state: IStore['beerList'] = { items: [], nextPageNumber: 0, lastBeerListLength: 0 },
+  action: AnyActionWithPayload<IBeerListPayload>
+) {
   switch (action.type) {
     // если получили данные
     case SET_BEER_LIST_ACTION_NAME:
-      return { items: action.payload.list, loading: false };
+      return { items: action.payload.list, loading: false, nextPageNumber: 2, lastBeerListLength: 0 };
     // если начали получать данные
     case START_GETTING_BEER_LIST_ACTION_NAME:
       return { ...state, loading: true };
     // если вместо данных получили ошибку
     case ERROR_GETTING_BEER_LIST_ACTION_NAME:
       return { ...state, error: true, loading: false };
-    case ADD_BEER_LIST_ACTION_NAME:
-      return { items: [...state.items, ...action.payload.list], loading: false };
-
+    case ADD_BEER_LIST_ACTION_NAME: {
+      let beerListLength = state.lastBeerListLength;
+      let newPageNumber = state.nextPageNumber;
+      const itemss = state.items;
+      if (action.payload.list.length > 24) {
+        newPageNumber = state.nextPageNumber + 1;
+      } else {
+        beerListLength = action.payload.list.length;
+        itemss.splice(state.items.length - state.lastBeerListLength, state.lastBeerListLength);
+      }
+      return {
+        items: [...itemss, ...action.payload.list],
+        loading: false,
+        nextPageNumber: newPageNumber,
+        lastBeerListLength: beerListLength,
+      };
+    }
     default:
       return state;
   }

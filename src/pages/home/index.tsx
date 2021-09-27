@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import routes from 'routes';
 import { Link, useParams } from 'react-router-dom';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import {
   CircularProgress,
   Typography,
@@ -27,8 +28,6 @@ import { beerStrengthСonfig, bitternessOfBeerСonfig, coloursConfig } from 'com
 import { IBeerStrengthСonfig, IBitternessOfBeerСonfig, IColoursConfig } from 'components/menu/types';
 
 const Home: React.FC = () => {
-  const time = React.useRef<NodeJS.Timer>();
-  const pageNamber = React.useRef(2);
   const [search, setSearch] = React.useState('');
   const { category } = useParams<{ category: string }>();
   const classes = useStyles();
@@ -39,32 +38,19 @@ const Home: React.FC = () => {
     beerStrengthСonfig[category as keyof IBeerStrengthСonfig] ||
     bitternessOfBeerСonfig[category as keyof IBitternessOfBeerСonfig] ||
     coloursConfig[category as keyof IColoursConfig];
-  const scrollHandler = (e: any) => {
-    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 50) {
-      if (time.current) clearTimeout(time.current);
-      time.current = setTimeout(() => {
-        dispatch(
-          getNewPageBeerList(
-            currentGroup
-              ? Object.fromEntries([...Object.entries(currentGroup.query), ['page', pageNamber.current]])
-              : { beer_name: category, page: pageNamber.current }
-          )
-        );
-        pageNamber.current += 1;
-      }, 500);
-    }
-  };
+  useBottomScrollListener(() => {
+    dispatch(
+      getNewPageBeerList(
+        currentGroup
+          ? Object.fromEntries([...Object.entries(currentGroup.query), ['page', beerList.nextPageNumber]])
+          : { beer_name: category, page: beerList.nextPageNumber }
+      )
+    );
+  });
   React.useEffect(() => {
     dispatch(getBeerList(currentGroup ? currentGroup.query : { beer_name: category }));
-    document.addEventListener('scroll', scrollHandler);
-    return () => {
-      document.removeEventListener('scroll', scrollHandler);
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
-  React.useEffect(() => {
-    pageNamber.current = 2;
-  }, [beerList.loading]);
   return (
     <>
       {beerList.loading && (
