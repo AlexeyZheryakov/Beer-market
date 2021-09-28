@@ -7,6 +7,8 @@ import {
 } from 'redux/reducers/beerList/actions';
 import { IStore, AnyActionWithPayload } from 'redux/types';
 
+const PAGE_LIMIT = 25;
+
 interface IBeerListPayload {
   list: Array<IBeerDTO>;
 }
@@ -29,7 +31,7 @@ function beerListReducer(
       let beerListLength = state.lastBeerListLength;
       let newPageNumber = state.nextPageNumber;
       const itemss = state.items;
-      if (action.payload.list.length > 24) {
+      if (action.payload.list.length > PAGE_LIMIT - 1) {
         newPageNumber = state.nextPageNumber + 1;
       } else {
         beerListLength = action.payload.list.length;
