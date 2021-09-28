@@ -42,6 +42,9 @@ const useStyles = makeStyles(() => ({
     padding: theme.spacing(2.5),
     maxWidth: 600,
   },
+  box: {
+    textAlign: 'center',
+  },
 }));
 
 export default useStyles;

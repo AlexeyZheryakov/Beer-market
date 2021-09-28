@@ -72,6 +72,7 @@ enum ParamsNames {
   ebc_gt = 'ebc_gt',
   ebc_lt = 'ebc_lt',
   beer_name = 'beer_name',
+  page = 'page',
 }
 
 export type TBeerListParams = Partial<Record<ParamsNames, string | number>>;

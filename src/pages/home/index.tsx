@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import routes from 'routes';
 import { Link, useParams } from 'react-router-dom';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import {
   CircularProgress,
   Typography,
@@ -19,7 +20,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { IStore } from 'redux/types';
 import { IBeerDTO } from 'Api/beer';
-import { getBeerList } from 'redux/reducers/beerList/actions';
+import { getBeerList, getNewPageBeerList } from 'redux/reducers/beerList/actions';
 import { incrementCountBeerToCartAction } from 'redux/reducers/cart/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/home/styles';
@@ -37,6 +38,15 @@ const Home: React.FC = () => {
     beerStrengthСonfig[category as keyof IBeerStrengthСonfig] ||
     bitternessOfBeerСonfig[category as keyof IBitternessOfBeerСonfig] ||
     coloursConfig[category as keyof IColoursConfig];
+  useBottomScrollListener(() => {
+    dispatch(
+      getNewPageBeerList(
+        currentGroup
+          ? Object.fromEntries([...Object.entries(currentGroup.query), ['page', beerList.nextPageNumber]])
+          : { beer_name: category, page: beerList.nextPageNumber }
+      )
+    );
+  });
   React.useEffect(() => {
     dispatch(getBeerList(currentGroup ? currentGroup.query : { beer_name: category }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,8 +54,9 @@ const Home: React.FC = () => {
   return (
     <>
       {beerList.loading && (
-        <Box p={10}>
+        <Box className={classes.box} p={10}>
           <CircularProgress />
+          <Typography>Loading...</Typography>
         </Box>
       )}
       {beerList.error && <Typography>Произошла ошибка</Typography>}

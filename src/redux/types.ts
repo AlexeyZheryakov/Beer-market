@@ -13,6 +13,8 @@ interface IRemoteData {
 }
 interface IBeerList extends IRemoteData {
   items: Array<IBeerDTO>;
+  nextPageNumber: number;
+  lastBeerListLength: number;
 }
 
 interface IBeerDetails extends IRemoteData {

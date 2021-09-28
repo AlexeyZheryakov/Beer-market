@@ -3,7 +3,6 @@ import { theme } from 'App';
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: 'gainsboro',
     marginTop: theme.spacing(4.5),
   },
   img: {
@@ -21,7 +20,6 @@ const useStyles = makeStyles(() => ({
     marginTop: theme.spacing(1),
   },
   form: {
-    backgroundColor: 'gainsboro',
     marginTop: theme.spacing(2.5),
   },
   card: {
@@ -47,6 +45,9 @@ const useStyles = makeStyles(() => ({
   },
   cardHeder: {
     height: 64,
+  },
+  box: {
+    textAlign: 'center',
   },
 }));
 
