@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import { useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import routes from 'routes';
 import useStyles from 'pages/cart/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-const CartForAppBar = () => {
+const CartForAppBar: FC = () => {
   const { pathname } = useLocation();
   const classes = useStyles();
   const cartBeerFromRedux: IStore['beerCart'] = useSelector<IStore, IStore['beerCart']>((state) => state.beerCart);

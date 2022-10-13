@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { AppBar, Typography, Grid } from '@material-ui/core';
 import CartForAppBar from 'pages/cart/cartForAppBar';
 import Menu from 'components/menu';
@@ -6,8 +6,9 @@ import Collapse from '@material-ui/core/Collapse';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import useStyles from 'components/layout/styles';
+import Footer from 'components/Footer';
 
-const Layout: React.FC = ({ children }) => {
+const Layout: FC = ({ children }) => {
   const [open, setOpen] = React.useState(true);
   const handleClick = () => {
     setOpen(!open);
@@ -42,6 +43,7 @@ const Layout: React.FC = ({ children }) => {
           {children}
         </Grid>
       </Grid>
+      <Footer />
     </div>
   );
 };

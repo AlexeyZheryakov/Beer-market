@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import useStyles from 'pages/cart/styles';
 import routes from 'routes';
 import { Link, useParams } from 'react-router-dom';
@@ -16,7 +16,7 @@ import {
 import { IStore } from 'redux/types';
 import { useSelector } from 'react-redux';
 
-const Cart: React.FC = () => {
+const Cart: FC = () => {
   const { category } = useParams<{ category: string }>();
   const classes = useStyles();
   const beerCart: IStore['beerCart'] = useSelector<IStore, IStore['beerCart']>((state) => state.beerCart);

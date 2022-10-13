@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import routes from 'routes';
 import CenteredTabs from 'pages/details/tabs';
@@ -25,7 +25,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import useStyles from 'pages/details/styles';
 import { addBeerToCartAction, removeBeerFromCartAction } from 'redux/reducers/cart/actions';
 
-const Details: React.FC = () => {
+const Details: FC = () => {
   const [quantity, setQuantity] = React.useState(1);
   const validValue = (value: number) => {
     if (value > 99) setQuantity(99);

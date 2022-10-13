@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import routes from 'routes';
 import { Link, useParams } from 'react-router-dom';
@@ -27,8 +27,8 @@ import useStyles from 'pages/home/styles';
 import { beerStrengthСonfig, bitternessOfBeerСonfig, coloursConfig } from 'components/menu/config';
 import { IBeerStrengthСonfig, IBitternessOfBeerСonfig, IColoursConfig } from 'components/menu/types';
 
-const Home: React.FC = () => {
-  const [search, setSearch] = React.useState('');
+const Home: FC = () => {
+  const [search, setSearch] = useState('');
   const { category } = useParams<{ category: string }>();
   const classes = useStyles();
   const beerList: IStore['beerList'] = useSelector<IStore, IStore['beerList']>((state) => state.beerList);
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
       )
     );
   });
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getBeerList(currentGroup ? currentGroup.query : { beer_name: category }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);

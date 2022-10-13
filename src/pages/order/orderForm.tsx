@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import InputMask from 'react-input-mask';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -8,8 +8,17 @@ import { FormikProps } from 'formik';
 import { add } from 'date-fns';
 import Values from 'pages/order/types';
 
-export default function OrderForm(props: FormikProps<Values>) {
-  const { values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty, setFieldValue } = props;
+const OrderForm: FC<FormikProps<Values>> = ({
+  values,
+  errors,
+  touched,
+  handleChange,
+  handleBlur,
+  isValid,
+  handleSubmit,
+  dirty,
+  setFieldValue,
+}) => {
   const classes = useStyles();
   const minOrderDate = add(new Date(), { days: 2 });
   return (
@@ -170,4 +179,6 @@ export default function OrderForm(props: FormikProps<Values>) {
       </Button>
     </form>
   );
-}
+};
+
+export default OrderForm;

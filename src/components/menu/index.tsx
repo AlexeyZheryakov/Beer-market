@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { List, ListItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import routes from 'routes';
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Menu: React.FC = () => {
+const Menu: FC = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const selected = pathname.split('/')[1];

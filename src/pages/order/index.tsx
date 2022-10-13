@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import useStyles from 'pages/order/styles';
 import { Card, CardHeader, Breadcrumbs, Typography, Divider, CardContent } from '@material-ui/core';
 import { Link, useParams } from 'react-router-dom';
@@ -9,7 +9,7 @@ import OrderForm from 'pages/order/orderForm';
 import Values from 'pages/order/types';
 import { format } from 'date-fns';
 
-const Order: React.FC = () => {
+const Order: FC = () => {
   const { category } = useParams<{ category: string }>();
   const handleSubmitClick = (values: Values) => {
     const { date } = values;
@@ -43,4 +43,5 @@ const Order: React.FC = () => {
     </Card>
   );
 };
+
 export default Order;
