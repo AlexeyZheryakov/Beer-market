@@ -5,32 +5,47 @@ import Home from 'pages/home';
 import Details from 'pages/details';
 import Order from 'pages/order';
 import routes from 'routes';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Layout from 'components/layout';
+
+export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#ffff72',
+      main: '#ffeb3b',
+      dark: '#c8b900',
+      contrastText: '#000000',
+    },
+    secondary: {
+      light: '#ffff6e',
+      main: '#cddc39',
+      dark: '#99aa00',
+      contrastText: '#000000',
+    },
+  },
+});
 
 export default function App() {
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>Bear-Market</li>
-          </ul>
-        </nav>
-
-        <Switch>
-          <Route path={routes.order()}>
-            <Order />
-          </Route>
-          <Route path={routes.details()}>
-            <Details />
-          </Route>
-          <Route path={routes.cart()}>
-            <Сart />
-          </Route>
-          <Route path={routes.main()}>
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Layout>
+          <Switch>
+            <Route path={routes.order()}>
+              <Order />
+            </Route>
+            <Route path={routes.details()}>
+              <Details />
+            </Route>
+            <Route path={routes.cart()}>
+              <Сart />
+            </Route>
+            <Route path={routes.main()}>
+              <Home />
+            </Route>
+          </Switch>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   );
 }

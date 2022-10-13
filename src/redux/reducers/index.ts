@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import beerListReducer from './beerList/reducer';
-import detailsBeerReducer from './beerDetails/reducer';
+import beerDetailsReducer from './beerDetails/reducer';
+import beerCartReducer from './cart/reducer';
 
 const rootReducer = combineReducers({
   beerList: beerListReducer,
-  detailsBeer: detailsBeerReducer,
+  beerDetails: beerDetailsReducer,
+  beerCart: beerCartReducer,
 });
 
 export default rootReducer;

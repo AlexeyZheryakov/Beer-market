@@ -13,14 +13,29 @@ interface IRemoteData {
 }
 interface IBeerList extends IRemoteData {
   items: Array<IBeerDTO>;
+  nextPageNumber: number;
+  lastBeerListLength: number;
 }
 
-interface IDetailsBeer extends IRemoteData {
+interface IBeerDetails extends IRemoteData {
   item: IBeerDTO;
+}
+
+export interface ICartBeer extends IBeerDTO {
+  count: number;
+}
+
+export interface ISelectedIds {
+  [key: string]: number;
+}
+
+interface ICartReducer {
+  items: Array<ICartBeer>;
+  selectedIds: ISelectedIds;
 }
 
 export interface IStore {
   beerList: IBeerList;
-  other: string;
-  detailsBeer: IDetailsBeer;
+  beerDetails: IBeerDetails;
+  beerCart: ICartReducer;
 }
