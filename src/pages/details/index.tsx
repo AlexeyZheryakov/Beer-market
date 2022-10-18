@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import routes from 'routes';
+import paths from 'routes/config';
 import CenteredTabs from 'pages/details/tabs';
 
 import {
@@ -60,7 +60,7 @@ const Details: FC = () => {
             <CardHeader title={beerDetails.item.name} />
             <Divider />
             <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
-              <Link className={classes.buttonLink} color="inherit" to={routes.main(category)}>
+              <Link className={classes.buttonLink} color="inherit" to={paths.main(category)}>
                 Catalog
               </Link>
               <Typography color="textPrimary">{beerDetails.item.name}</Typography>
@@ -99,7 +99,7 @@ const Details: FC = () => {
                       Remove From Cart
                     </Button>
                   )}
-                  <Link className={classes.buttonLink} to={routes.cart(category)}>
+                  <Link className={classes.buttonLink} to={paths.cart(category)}>
                     <Button variant="contained" className={classes.button} startIcon={<ShoppingCartIcon />}>
                       Go To Cart
                     </Button>

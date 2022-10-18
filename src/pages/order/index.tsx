@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import useStyles from 'pages/order/styles';
 import { Card, CardHeader, Breadcrumbs, Typography, Divider, CardContent } from '@material-ui/core';
 import { Link, useParams } from 'react-router-dom';
-import routes from 'routes';
+import paths from 'routes/config';
 import { Formik } from 'formik';
 import { initialValues, validationsShema } from 'pages/order/constants';
 import OrderForm from 'pages/order/orderForm';
@@ -25,7 +25,7 @@ const Order: FC = () => {
       <CardHeader title="Ordering" />
       <Divider />
       <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
-        <Link className={classes.buttonLink} color="inherit" to={routes.main(category)}>
+        <Link className={classes.buttonLink} color="inherit" to={paths.main(category)}>
           Catalog
         </Link>
         <Typography color="textPrimary">Ordering</Typography>

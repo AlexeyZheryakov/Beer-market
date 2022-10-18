@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { IStore } from 'redux/types';
-import routes from 'routes';
+import paths from 'routes/config';
 import useStyles from 'pages/cart/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
@@ -14,7 +14,7 @@ const CartForAppBar: FC = () => {
   const cartLength = cartBeerFromRedux.items.length;
   return (
     <>
-      <Link className={classes.buttonLink} to={routes.cart(pathname.split('/')[1])}>
+      <Link className={classes.buttonLink} to={paths.cart(pathname.split('/')[1])}>
         <IconButton>
           <ShoppingCartIcon />
         </IconButton>

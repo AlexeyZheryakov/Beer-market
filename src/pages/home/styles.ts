@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { theme } from 'App';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(4.5),
   },

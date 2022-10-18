@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import routes from 'routes';
+import paths from 'routes/config';
 import { Link, useParams } from 'react-router-dom';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import {
@@ -72,7 +72,7 @@ const Home: FC = () => {
               variant="outlined"
               size="small"
             />
-            <Link className={classes.buttonLink} to={routes.main(search)}>
+            <Link className={classes.buttonLink} to={paths.main(search)}>
               <Button color="primary" variant="contained">
                 Search
               </Button>
@@ -95,12 +95,12 @@ const Home: FC = () => {
                     <IconButton onClick={handleIncrementCountBeer(beer)}>
                       <AddShoppingCartIcon className={classes.icons} />
                     </IconButton>
-                    <Link to={routes.cart(category)}>
+                    <Link to={paths.cart(category)}>
                       <IconButton>
                         <ShoppingCartIcon className={classes.icons} />
                       </IconButton>
                     </Link>
-                    <Link className={classes.buttonLink} to={routes.details(String(beer.id), category)}>
+                    <Link className={classes.buttonLink} to={paths.details(String(beer.id), category)}>
                       <Button variant="outlined">Details...</Button>
                     </Link>
                   </CardActions>

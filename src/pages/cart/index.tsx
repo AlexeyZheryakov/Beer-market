@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import useStyles from 'pages/cart/styles';
-import routes from 'routes';
+import paths from 'routes/config';
 import { Link, useParams } from 'react-router-dom';
 import {
   Card,
@@ -29,7 +29,7 @@ const Cart: FC = () => {
         <CardHeader title="Cart" />
         <Divider />
         <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
-          <Link className={classes.buttonLink} color="inherit" to={routes.main(category)}>
+          <Link className={classes.buttonLink} color="inherit" to={paths.main(category)}>
             Catalog
           </Link>
           <Typography color="textPrimary">Cart</Typography>
@@ -72,7 +72,7 @@ const Cart: FC = () => {
         </CardContent>
         <CardActions className={classes.cardActions}>
           <Typography variant="h4">TOTAL:{totalPrice}$</Typography>
-          <Link className={classes.buttonLink} to={routes.order(category)}>
+          <Link className={classes.buttonLink} to={paths.order(category)}>
             <Button color="primary" variant="contained">
               Go to ordering
             </Button>

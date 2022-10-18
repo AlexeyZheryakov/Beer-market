@@ -1,9 +1,14 @@
 import React from 'react';
+import useStyles from './styles';
 
 const Footer = () => {
-  console.log(123);
+  const { footer } = useStyles();
 
-  return <footer>Developed by Alexey Zheryakov</footer>;
+  return (
+    <footer className={footer}>
+      <p>Developed by Alexey Zheryakov</p>
+    </footer>
+  );
 };
 
 export default Footer;
